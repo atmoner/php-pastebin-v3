@@ -51,7 +51,7 @@ $smarty->addPluginsDir($path.'/libs/plugins/');
 $smarty->template_dir = $path.'/themes/'.$conf['theme'].'/';
 $smarty->compile_dir = $path.'/cache/compile_tpl/';
 $smarty->cache_dir = $path.'/cache/';
-$smarty->debugging = true;
+$smarty->debugging = false;
 $smarty->caching = $conf['timecache'];
 $smarty->cache_lifetime = $conf['timecache'];
 $smarty->config_dir = $path.'/libs/lang/';
