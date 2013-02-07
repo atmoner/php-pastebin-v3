@@ -63,7 +63,7 @@
             </form> 
 			<ul class="nav pull-right">
             	{foreach item=i from=$hooks->add_User_Menu|@sortby:"#prio"} 
-            		{if $i.id eq 'registration'}
+            		{if $i.id eq 'gestcp'}
                 	<li><a href="{$getConfigs.baseurl}/registration.html">{$lang.registration}</a></li>
                 	{/if}                	
                 {/foreach} 
