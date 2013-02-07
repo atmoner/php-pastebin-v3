@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)\.html$ ?page=$1 [L,QSA]
+RewriteRule ^([[:alnum:]]{8})/*$ ?page=paste&id=$1 [QSA,L]
+RewriteRule ^([^-]*)/([^-]*)/$ ?page=$1&act=$2 [QSA,L]
+RewriteRule ^search/([^-]*)$ ?page=last-pastes&searchPaste=$1 [QSA,L]
+ 
