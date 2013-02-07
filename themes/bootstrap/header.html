@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{$title} - {$Name}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{$getConfigs.metad}">
+    <meta name="keywords" content="{$getConfigs.metak}" />
+    <meta name="author" content="{$getConfigs.title}">
+
+    {if $hooks->add_Css}
+    {foreach item=i from=$hooks->add_Css|@sortby:"#prio"}<link href="{$i.file}" rel="stylesheet">{/foreach}
+    {/if}  
+    	<link href="{$getConfigs.baseurl}/themes/bootstrap/style/bootstrap.css" rel="stylesheet">
+    	<link href="{$getConfigs.baseurl}/themes/bootstrap/style/bootstrap-responsive.css" rel="stylesheet">
+	
+	
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    {if $hooks->add_Js}
+    	{foreach item=i from=$hooks->add_Js|@sortby:"#prio"}<script type="text/javascript" src="{$i.file}"></script>
+    {/foreach}
+    {/if}
+    <script type="text/javascript" src="{$getConfigs.baseurl}/themes/bootstrap/js/bootstrap.js"></script>
+	
+	
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/">{$Name}</a>
+          <div class="nav-collapse collapse">
+ 
+            <ul class="nav">
+			  {foreach item=i from=$hooks->add_Menu|@sortby:"#prio"}
+			  <li><a href="{$getConfigs.baseurl}/{$i.url}">{$i.title}</a></li>
+			  {/foreach} 
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{$lang.changelang} <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                {foreach item=i from=$hooks->add_Menu_Lang|@sortby:"#prio"}
+                  <li><a href="{$i.url}" title="{$i.title}"><img src="{$getConfigs.baseurl}/themes/bootstrap/img/flag/{$i.img}" width="21" height="15" alt="{$i.img}" /> {$i.title}</a></li>
+                {/foreach}   
+                </ul>
+              </li>
+               
+            </ul>
+ 		{if empty($userId)} 
+            <form class="navbar-form pull-right" action="zone-login.html" method="post" enctype="multipart/form-data">
+              <input class="span2" type="text" name="user" placeholder="User name">
+              <input class="span2" type="password" name="pass" placeholder="Password">
+              <input type="submit" name="submit" value="{$lang.login}" class="btn"/>
+            </form> 
+			<ul class="nav pull-right">
+            	{foreach item=i from=$hooks->add_User_Menu|@sortby:"#prio"} 
+            		{if $i.id eq 'registration'}
+                	<li><a href="{$getConfigs.baseurl}/registration.html">{$lang.registration}</a></li>
+                	{/if}                	
+                {/foreach} 
+			</ul>
+  		{else}
+  			<ul class="nav pull-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{$lang.Loginas} {$userName} <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+            	{foreach item=i from=$hooks->add_User_Menu|@sortby:"#prio"} 
+            	
+            		{if $i.id eq 'gestcp'}
+            		<li class="nav-header">Guest panel</li>
+                	<li><a href="{$getConfigs.baseurl}/registration.html">{$lang.registration}</a></li>
+                	<li><a href="{$getConfigs.baseurl}/zone-login.html">{$lang.login}</a></li>
+                	{elseif $i.id eq 'admincp'}
+                	<li class="nav-header">Admin panel</li>
+                	<li><a href="{$getConfigs.baseurl}/admincp.html"><i class="icon-wrench"></i> {$lang.adminsettings}</a></li>
+                	<li><a href="{$getConfigs.baseurl}/admincp/users/"><i class="icon-user"></i> {$lang.adminusers}</a></li>   
+                	<li><a href="{$getConfigs.baseurl}/admincp/pastes/"><i class="icon-file"></i> {$lang.adminpastes}</a></li>
+                	<li><a href="{$getConfigs.baseurl}/admincp/plugins/"><i class="icon-magnet"></i> {$lang.adminplugins} </a></li>             	
+                	{elseif $i.id eq 'usercp'}
+                	<li class="nav-header">User panel</li>
+                	<li><a href="{$getConfigs.baseurl}/account.html"><i class="icon-cog"></i> {$lang.accountSettings}</a></li>
+                	<li class="divider"></li>
+                	<li><a href="{$getConfigs.baseurl}/index.php?page=logout"><i class="icon-remove-circle"></i> {$lang.logout}</a></li>
+                	{else}
+                	<li><a href="{$getConfigs.baseurl}/{$i.url}">{$i.title}</a></li>
+                	{/if}                	
+                {/foreach} 
+                </ul>
+              </li>
+            </ul>           
+ 		{/if}
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    <header class="jumbotron masthead" id="overview">
+      <div class="inner">
+        <div class="container">
+          <h1>{$Name}</h1> 
+        </div><!-- /container -->
+      </div>
+    </header>
+    <div class="container-fluid">    
+

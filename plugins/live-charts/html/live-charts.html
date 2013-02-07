@@ -1,0 +1,77 @@
+{include file="header.html" title=Premium}
+ 
+      <div class="row-fluid">
+			{include file="sidebar.html"} 
+        <div class="span8"> 
+            <div class="base-block">
+              <div class="title">Live chart</div>
+ 
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+
+
+<script type="text/javascript">
+/**
+ * Request data from the server, add it to the graph and set a timeout to request again
+ */
+
+
+$(function () {
+    var chart;
+	$(document).ready(function() {
+		function requestData() {
+			$.ajax({
+				url: '/?page=live-charts&json',
+				success: function(point) {
+				    var series = chart.series[0],
+				        shift = series.data.length > 20; // shift if the series is longer than 20
+
+				    // add the point
+				    chart.series[0].addPoint(point, true, shift);
+				    
+				    // call it again after one second
+				    setTimeout(requestData, 1000);    
+				},
+				cache: false
+			});
+		}
+		
+		chart = new Highcharts.Chart({
+		    chart: {
+		        renderTo: 'container',
+		        defaultSeriesType: 'spline',
+		        events: {
+		            load: requestData
+		        }
+		    },
+		    title: {
+		        text: 'Live Pastes'
+		    },
+		    xAxis: {
+		        type: 'datetime',
+		        tickPixelInterval: 150,
+		        maxZoom: 20 * 1000
+		    },
+		    yAxis: {
+		        minPadding: 0.2,
+		        maxPadding: 0.2,
+		        title: {
+		            text: 'Value',
+		            margin: 80
+		        }
+		    },
+		    series: [{
+		        name: 'Random data',
+		        data: []
+		    }]
+		});        
+	});
+    
+});
+</script>
+<div id="container" {if $getConfigs.5.value eq 'default'}style="width: 770px; height: 400px; margin: 0 auto"{else}style="min-width: 400px; height: 400px; margin: 0 auto"{/if}></div>		      
+		  
+		   </div>
+ 
+{include file="footer.html"}

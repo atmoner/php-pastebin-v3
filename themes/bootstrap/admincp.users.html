@@ -1,0 +1,184 @@
+{include file="header.html" title=Users} 
+      <div class="row-fluid">
+			{include file="admin.sidebar.html"} 
+        <div class="span8"> 
+         
+ 
+   	{if isset($smarty.get.edit)}
+             <div class="base-block">
+              <div class="title">Edit user: {$getUserdata->name}</div>    
+  
+          <form id="editUser" name="editUser" method="POST">
+                                  
+			<div class="control-group">
+			<label class="control-label" for="name">User name</label>
+				<div class="controls">
+					<input type="text" id="name" name="name" value="{$getUserdata->name}">
+				</div>
+			</div>                                  
+
+			<div class="control-group">
+			<label class="control-label" for="pass">User pass</label>
+				<div class="controls">
+					<input type="text" id="pass" placeholder="Leave blank to not change the pass"  name="pass">
+				</div>
+			</div>        
+ 
+			<div class="control-group">
+			<label class="control-label" for="mail">User mail</label>
+				<div class="controls">
+					<input type="text" id="mail" name="mail" value="{$getUserdata->mail}">
+				</div>
+			</div>  
+ 
+			<div class="control-group">
+			<label class="control-label" for="level">User level</label>
+				<div class="controls">
+					<select name="level" class="uniform">
+					{foreach key=key item=getStatut from=$getStatuts} 
+						<option value="{$getStatut.id}" {if $getUserdata->id eq $getStatut.id}SELECTED{/if}> {$getStatut.level}</option>
+					{/foreach}	
+					</select>   
+					 
+				</div>
+			</div>   
+
+			<div class="control-group">
+			<label class="control-label" for="location">Location</label>
+				<div class="controls">
+					<input type="text" id="location" name="location" value="{$getUserdata->location}">
+				</div>
+			</div>  
+
+			<div class="control-group">
+			<label class="control-label" for="website">Website</label>
+				<div class="controls">
+					<input type="text" id="website" name="website" value="{$getUserdata->website}">
+				</div>
+			</div>  
+
+			<div class="control-group">
+			<label class="control-label" for="signature">Signature</label>
+				<div class="controls">
+					<textarea rows="3" id="signature" name="signature">{$getUserdata->signature}</textarea>
+				</div>
+			</div>  
+			
+            <input type="submit" name="button" id="button" value="Submit" class="btn btn-primary"/>
+            <input type="hidden" name="editUser" id="editUser" value="1" />
+                                    </div>
+                                    
+                                  </form>
+  
+                            </div>
+                        <!-- END FORM ELEMENT STYLES --> 	
+   	{else}  
+   	  
+   	  	{if $forbidden}
+               	 	<br />
+            <div class="alert alert-error">
+                   	<b>{$lang.error} :</b> prohibited action!
+                   	<a href="#" class="close" data-dismiss="alert">&times;</a>
+            </div>
+	 	{/if}	   	
+
+             <div class="base-block">
+              <div class="title">Add users</div>  
+				<form class="form-horizontal" method="post">
+					<div class="control-group">
+					<div class="control-group">
+					<label class="control-label" for="inputEmail">Username</label>
+							<div class="controls">
+								<input type="text" name="name" id="inputEmail" placeholder="User name">
+							</div>
+					</div>
+					<label class="control-label" for="inputEmail">Email</label>
+							<div class="controls">
+								<input type="text" name="mail" id="inputEmail" placeholder="User Email">
+							</div>
+					</div>
+					<div class="control-group">
+					<label class="control-label" for="inputPassword">Password</label>
+							<div class="controls">
+								<input type="password" name="pass" id="inputPassword" placeholder="User Password">
+					</div>
+						</div>
+					<div class="control-group">
+						<div class="controls">
+							<label class="checkbox">
+								<input type="checkbox" name="sendmail"> Send mail?
+							</label>
+							<button type="submit" name="submitadd" class="btn">Sign in</button>
+						</div>
+					</div>
+				</form>              
+             </div>			
+
+
+             <div class="base-block">
+              <div class="title">All users</div>  
+
+
+		<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">                
+				<thead>
+				    				<tr>
+				    				 	<th>User id</th>
+                                        <th>Name</th>
+                                        <th>Mail</th>
+                                        <th>Statut</th>
+                                        <th>Edit/delete</th>
+                                    </tr>
+                               	</thead>
+                                
+                                <tbody>
+                                {foreach key=key item=info from=$getUsers} 
+                                    {if $info.id}
+                                    <tr class="gradeA">
+                                    	<td class="center">{$info.id}</td>
+                                    	<td class="center">{$info.name}</td>
+                                    	<td class="center">{$info.mail}</td>
+                                    	<td class="center">{$info.level}</td>
+                                    	<td class="center">                                    	
+		                                	<a href="{$getConfigs.baseurl}/user/{$info.name}/" target="_BLANK">
+		                                		<i class="icon-eye-open"></i> View
+		                                	</a> 
+		                                	<a href="?edit={$info.id}">
+		                                		<i class="icon-search"></i> Edit
+		                                	</a> 
+		                                	{if $info.id neq '1'}
+		                                	<a href="?del={$info.id}">
+		                                	{/if}
+		                                		<i class="icon-remove"></i> Delete
+		                                	{if $info.id neq '1'}	
+		                                	</a>
+		                                	{/if}
+                                    	</td>
+                                    </tr>
+                                    {/if}
+                                {/foreach}     
+ 
+				</tbody>
+		</table>
+            </div>
+            {/if}
+          
+            
+	</div>
+   </div>
+ 				{literal}
+				<script type="text/javascript" charset="utf-8">
+					$(document).ready(function() {
+    					oTable = $('#example').dataTable({
+    					"oSearch": {"sSearch": "{/literal}{if isset($smarty.post.searchPaste)}{$smarty.post.searchPaste}{/if}{literal}"},
+        				"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+        				"sPaginationType": "bootstrap",        				 
+        				"oLanguage": {
+					      "sSearch": "{/literal}{$lang.filterRecords}{literal}:",
+					      "sLengthMenu": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {/literal}{$lang.display}{literal} _MENU_ {/literal}{$lang.records}{literal}",
+					      "sInfo": "{/literal}{$lang.gotAtotal}{literal} _TOTAL_ {/literal}{$lang.entriesToshow}{literal} (_START_ - _END_)"
+					    }					    
+        				});
+    				} );
+    			</script>
+    			{/literal}
+{include file="footer.html"}

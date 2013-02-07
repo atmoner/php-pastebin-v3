@@ -1,0 +1,89 @@
+{include file="header.html" title=$hooks->title->laste_paste}
+ 
+      <div class="row-fluid">
+			{include file="sidebar.html"} 
+        <div class="span8"> 
+
+       
+				 	 {foreach item=i from=$hooks->addblock|@sortby:"#prio"}
+					 	{if $i.id eq 'defaultLastpates'}      	      
+
+      					<div class="base-block">          
+ 							<div class="title">{$lang.recentPastes}</div> 
+ 							 
+								<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+												    
+														<thead>
+															<tr>
+															<th>{$lang.added}</th>
+												            	<th>{$lang.name}</th>
+												                
+												                <th>{$lang.expires}</th>
+												                <th>{$lang.syntax}</th>
+												                <th>{$lang.hits}</th>
+												                <th>{$lang.author}</th>
+												            </tr>
+												       	</thead>
+												        
+												        <tbody>
+												        {foreach key=key item=item from=$getPastespaginate} 
+												            <tr class="gradeA">
+												            <td><i class="icon-calendar"></i> {date('Y-m-d H:s',$item.date)}</td>
+												            	<td><a href="{$getConfigs.baseurl}/{$item.uniqueid}"><i class="icon-file"></i> {$item.title}</a></td>
+												            	
+												            	<td>
+													 			{if $item.expire eq '1'}
+																	  {$lang.10mn}
+																	{elseif $item.expire eq '2'}
+																	  {$lang.1h}
+																	{elseif $item.expire eq '3'}
+																	  {$lang.1d}
+																	{elseif $item.expire eq '4'}
+																	  {$lang.10m}
+																	{else}
+																	  {$lang.never}
+																{/if}	                                   	
+												            	</td>
+												            	<td class="center">{$item.lang|capitalize}</td>
+												            	<td class="center"><i class="icon-eye-open"></i> {$item.hits}</td>
+												            	<td class="center"><i class="icon-user"></i> <a href="{$getConfigs.baseurl}/user/{$item.name}/">{$item.name}</td>
+												            </tr>
+												        {/foreach}     
+						 
+										</tbody>
+								</table>
+ 							</div>  
+            {else}            
+      					<div class="base-block">          
+ 							<div class="title">{$i.title}</div> 
+	 						{$i.content} 
+			            </div> 
+ 
+ 
+	 		{/if}            
+	 {/foreach}            
+            
+        </div><!--/span-->
+      </div><!--/row-->
+
+  
+				{literal}
+				<script type="text/javascript" charset="utf-8">
+					$(document).ready(function() {
+    					var oTable = $('#example').dataTable({
+    					"oSearch": {"sSearch": "{/literal}{if isset($smarty.get.searchPaste)}{$smarty.get.searchPaste|escape:'html'}{/if}{literal}"},
+        				"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+        				"sPaginationType": "bootstrap",        				 
+        				"oLanguage": {
+					      "sSearch": "{/literal}{$lang.filterRecords}{literal}:",
+					      "sLengthMenu": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {/literal}{$lang.display}{literal} _MENU_ {/literal}{$lang.records}{literal}",
+					      "sInfo": "{/literal}{$lang.gotAtotal}{literal} _TOTAL_ {/literal}{$lang.entriesToshow}{literal} (_START_ - _END_)"
+					    }					    
+        				});
+        				oTable.fnSort( [ [0,'desc'] ] );
+    				} );
+    			</script>
+    			{/literal}
+
+      
+{include file="footer.html"}

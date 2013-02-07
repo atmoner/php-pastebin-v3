@@ -1,0 +1,135 @@
+{include file="header.html" title=Admincp}
+		<script type="text/javascript">
+		  $(document).ready(function () {
+			$("[rel=tooltip]").tooltip();
+		  });
+		</script> 
+      <div class="row-fluid">
+			{include file="admin.sidebar.html"} 
+        <div class="span8">
+		
+
+    <form class="form-horizontal" id="form2" name="form2" method="post" action="">
+        
+            <div class="base-block">
+              <div class="title">GENERAL SETTINGS</div>        
+
+
+    
+			<div class="control-group">
+			<label class="control-label" for="baseurl">Domaine</label>
+				<div class="controls">
+				
+					<input data-placement="right" rel="tooltip" data-original-title="Whitout / eg: http://localhost.com" type="text" id="baseurl" name="baseurl" value="{$getConfigs.baseurl}">
+					 
+				</div>
+			</div>
+
+			<div class="control-group">
+			<label class="control-label" for="title">Website title</label>
+				<div class="controls">
+					<input data-placement="right" rel="tooltip" data-original-title="Title of all pages" type="text" id="title" name="title" value="{$getConfigs.title}">
+				</div>
+			</div>
+
+			<div class="control-group">
+			<label class="control-label" for="timecache">Cache lifetime</label>
+				<div class="controls">
+					<input data-placement="right" rel="tooltip" data-original-title="Zero to dislable it" type="text" id="timecache" name="timecache" value="{$getConfigs.timecache}">
+				</div>
+			</div>
+
+			<div class="control-group">
+			<label class="control-label" for="lang">Default Language</label>
+				<div class="controls">
+                                   	<select name="lang" id="lang" class="uniform" data-placement="right" rel="tooltip" data-original-title="Select your default language">
+                           	  		  <option value="en">English</option>
+                           	  		  <option value="fr">French</option>
+                           	  		  <option value="ru">Russe</option>
+                               		</select>
+				</div>
+			</div>
+
+			<div class="control-group">
+			<label class="control-label" for="theme">Default theme</label>
+				<div class="controls">
+                                   	<select name="theme" id="theme" class="uniform" data-placement="right" rel="tooltip" data-original-title="Select your default theme">
+                                         {foreach from=$getThemes key=k item=v} 
+                                         <option value="{$v}" {if $getConfigs.theme eq $v}selected="selected"{/if}>{$v}</option>
+                                         {/foreach}
+                               		</select>
+				</div>
+			</div>
+
+			<div class="control-group">
+			<label class="control-label" for="metad">Meta description</label>
+				<div class="controls">
+					<textarea data-placement="right" rel="tooltip" data-original-title="Your meta description" name="metad" class="st-forminput" id="metad" style="width:510px" rows="3" cols="47">{$getConfigs.metad}</textarea> 
+				</div>
+			</div>
+			
+			<div class="control-group">
+			<label class="control-label" for="metak">Meta keywords</label>
+				<div class="controls">
+					<textarea data-placement="right" rel="tooltip" data-original-title="Your meta keywords" name="metak" class="st-forminput" id="metak" style="width:510px" rows="3" cols="47">{$getConfigs.metak}</textarea> 
+				</div>
+			</div>			
+ 
+		</div>		
+
+            <div class="base-block">
+              <div class="title">Paypal Settings</div>   
+                		
+			<div class="control-group">
+			<label class="control-label" for="paypalmail">Paypal mail</label>
+				<div class="controls">
+					<input data-placement="right" rel="tooltip" data-original-title="Your paypal mail" type="text" name="paypalmail" id="paypalmail" value="{$getConfigs.paypalmail}">
+				</div>
+			</div>	
+ 
+                		
+			<div class="control-group">
+			<label class="control-label" for="amout">Amout premium</label>
+				<div class="controls">
+					<input data-placement="right" rel="tooltip" data-original-title="Amout of premium account" type="text" id="amout" value="{$getConfigs.amout}">
+				</div>
+			</div>				
+				
+			</div>	
+
+            <div class="base-block">
+              <div class="title">Pastes Settings</div>   
+
+            {foreach from=$getStatuts key=myId item=i} 
+			<div class="control-group">
+			<label class="control-label" for="maxline_{$i.id}">Max line for {$i.level}</label>
+				<div class="controls">
+					<input type="text" name="maxline_{$i.id}" id="maxline_{$i.id}" value="{$i.maxlines}">
+				</div>
+			</div>	
+			{/foreach}   
+				
+			</div>	
+
+			{foreach item=i from=$hooks->addblock|@sortby:"#prio"}
+			<div class="control-group">
+			<label class="control-label">{$i.title}</label>
+				<div class="controls">
+					{$i.content}
+				</div>
+			</div>	
+			{/foreach}
+
+            <div class="base-block">
+              <div class="title">Submit</div>   
+
+            <input type="submit" name="submit" value="Submit" class="btn btn-primary"/>
+				
+			</div>	
+			
+    </form>
+
+     </div>
+</div>
+   
+{include file="footer.html"}

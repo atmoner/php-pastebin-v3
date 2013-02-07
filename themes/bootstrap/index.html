@@ -1,0 +1,104 @@
+{include file="header.html" title=$hooks->title->home_title}
+
+
+ 	<script language="JavaScript" type="text/javascript" src="libs/captcha/ajax_captcha.js"></script>
+
+
+
+      <div class="row-fluid">
+			{include file="sidebar.html"} 
+        <div class="span8">
+
+            {if isset($errorPaste)}
+               	 	<br />
+            <div class="alert alert-error">
+                   	<b>{$lang.error} :</b> {$lang.nopaste}
+                   	<a href="#" class="close" data-dismiss="alert">&times;</a>
+            </div>
+            {/if}  
+                                                         	
+            {if isset($errorCaptcha)}
+                	 <br />
+            <div class="alert alert-error">
+                   	<b>{$lang.error} :</b> {$lang.wrongCaptcha}
+                   	<a href="#" class="close" data-dismiss="alert">&times;</a>
+            </div>
+            {/if}    
+ 
+        				
+        <form method="POST" name="addpaste" id="addpaste" enctype="multipart/form-data">  
+		 {foreach item=i from=$hooks->addblock|@sortby:"#prio"}
+	 	 	{if $i.id eq 'pasteForm'}
+            <div class="base-block">
+            <div class="title">{$lang.newPaste}</div>
+            <p align="center"><textarea data-placement="top" rel="tooltip" data-original-title="{$lang.Intro}" rows="12" class="span11" name="paste" id="paste" style="resize:none;">{if isset($smarty.post.paste)}{$smarty.post.paste}{/if}</textarea></p>
+            </div> 
+            
+ 		   {elseif $i.id eq 'pasteOptions'} 		   
+           <div class="row-fluid">
+            <div class="base-block span6">
+              <div class="title">{$lang.Ops}</div>
+              <h4>{$lang.syntax}</h4>
+              <p>
+                 <select name="syntax" id="select1" class="uniform" data-placement="right" rel="tooltip" data-original-title="{$lang.selectlang}" >
+				       {foreach key=key item=item from=$getLangs}
+	                   		<option value="{$item.code}" name="{$item.code}">{$item.description}</option>
+				       {/foreach} 
+                 </select>              
+              </p>
+              <h4>{$lang.eXpiration}</h4>
+              <p>
+				<select name="expiration" class="uniform" data-placement="right" rel="tooltip" data-original-title="{$lang.selectlife}">
+					<option value="never">{$lang.never}</option>
+				    <option value="1">{$lang.10mn}</option>
+				    <option value="2">{$lang.1h}</option>
+				    <option value="3">{$lang.1d}</option>
+				    <option value="4">{$lang.1m}</option>
+				</select>             
+              </p>  
+              <h4>{$lang.exposure}</h4>
+              <p>
+				<select name="exposure" class="uniform" data-placement="right" rel="tooltip" data-original-title="{$lang.selectprivate}">
+				    <option value="public">{$lang.public}</option>
+				    <option value="private">{$lang.private}</option>
+				</select>              
+              </p>                            
+            </div><!--/span-->
+            
+            {elseif $i.id eq 'pasteName'}            
+            <div class="base-block span6">
+              <div class="title">{$lang.pasteName}</div>
+              <h4>{$lang.pasteName}</h4>
+              <p>
+				<input data-placement="right" rel="tooltip" data-original-title="{$lang.pasteName}" name="title" type="text" value="{if isset($smarty.post.title)}{$smarty.post.title}{/if}" class="st-forminput" /><br />
+		      </p>
+              <h4>Captcha</h4>
+              <p>
+ 			 	 
+				<input data-placement="right" rel="tooltip" data-original-title="{$lang.validcaptcha}" id="txtCaptcha" type="text" name="txtCaptcha" maxlength="5" size="13" /><br />
+				<img data-placement="right" rel="tooltip" data-original-title="{$lang.CoCtrit}" id="imgCaptcha" src="libs/captcha/create_image.php" onclick="setTimeout('refreshimg()', 300); return false;" alt="{$lang.CoCtrit}" /><br /><br />
+				<input name="submit" type="submit" value="Submit" id="submit" class="btn btn-primary" />     
+              </p>
+            </div><!--/span-->
+
+	 		{else}
+            <div class="base-block {$i.size}">
+              <div class="title">{$i.title}</div>
+              <p>{$i.content}</p>
+            </div><!--/span-->
+ 
+	 		{/if} 
+	 
+		{/foreach}  
+          </form>   
+          </div><!--/row-->
+        </div><!--/span-->
+      </div><!--/row-->
+      
+		<script type="text/javascript">
+		  $(document).ready(function () {
+			$("[rel=tooltip]").tooltip();
+		  });
+		</script> 
+		
+{include file="footer.html"}

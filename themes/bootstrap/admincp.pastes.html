@@ -1,0 +1,139 @@
+{include file="header.html" title=Pastes} 
+  
+		{literal}
+			<script type="text/javascript">
+			$(function() {
+				$('#datepicker').datepicker({
+					format: 'yyyy-dd-mm'
+				})
+			});
+			</script>
+		{/literal}
+
+ 
+      <div class="row-fluid">
+			{include file="admin.sidebar.html"} 
+        <div class="span8"> 
+ 
+ 
+   	{if isset($smarty.get.edit)} 
+ 
+           <form id="editPaste" name="editPaste" method="post">
+           
+             <div class="base-block">
+              <div class="title">Edit paste: {$getPaste.title}</div>                                         
+                                  
+				<div class="control-group">
+				<label class="control-label" for="title">Paste title</label>
+					<div class="controls">
+						<input type="text" id="title" name="title" value="{$getPaste.title}">
+					</div>
+				</div>                                  
+
+				<div class="control-group">
+				<label class="control-label" for="title">Date</label>
+					<div class="controls">
+							<div class="input-append date" data-date="{date('Y-m-d',$getPaste.date)}" data-date-format="yyyy-mm-dd">
+										<input name="date" class="span2" size="16" id="datepicker" type="text" value="{date('Y-m-d',$getPaste.date)}">
+										<span class="add-on"><i class="icon-th"></i></span>
+							</div>
+					</div>
+				</div>  
+
+				<div class="control-group">
+				<label class="control-label" for="title">Langague</label>
+					<div class="controls">
+                                   	<select name="lang" class="uniform">
+				                      {foreach key=key item=item from=$getLangs}
+	                       				<option value="{$item.code}" {if $getPaste.lang eq $item.description}selected="selected"{/if} name="{$item.code}">{$item.description}</option>
+				                      {/foreach} 
+                               		</select>
+					</div>
+				</div>   
+ 
+
+				<div class="control-group">
+				<label class="control-label" for="title">Paste</label>
+					<div class="controls">
+							<textarea rows="12" class="span11" name="paste" style="resize:none;">{$paste}</textarea> 
+					</div>
+				</div>  
+   				<input type="submit" name="button" id="button" value="Edit paste" class="btn btn-primary"/>
+           	  <input type="hidden" name="editPaste" value="1" />
+                                    </div>
+
+                            </div>
+                                    
+                       </form>
+  
+
+                        <!-- END FORM ELEMENT STYLES --> 	
+   	{else}    
+ 
+             <div class="base-block">
+              <div class="title">All pastes</div>      
+ 		
+
+		<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">                          
+				<thead>
+				    <tr>
+                                        <th>Title</th>
+                                        <th>Author</th>
+                                        <th>Unique id</th>
+                                        <th>Lang</th>
+                                        <th>Date</th>
+                                        <th>Hits</th>
+                                        <th>Edit/delete</th>
+                                    </tr>
+                               	</thead>
+                                
+                                <tbody>
+                                {foreach key=key item=item from=$getPastes} 
+                                    <tr class="gradeA">
+                                    	<td class="center">{$item.title}</td>
+                                    	<td class="center"><a href="{$getConfigs.baseurl}/user/{$item.name}/">{$item.name}</a></td>
+                                    	<td class="center">{$item.uniqueid}</td>
+                                    	<td class="center">{$item.lang}</td>
+                                    	<td class="center">{$item.date}</td>
+                                    	<td class="center">{$item.hits}</td>
+                                    	<td class="center">                                    	
+		                                	<a href="{$getConfigs.baseurl}/{$item.uniqueid}" target="_BLANK">
+		                                		<i class="icon-eye-open"></i> View
+		                                	</a> 
+		                                	<a href="?edit={$item.uniqueid}">
+		                                		<i class="icon-search"></i> Edit
+		                                	</a> 
+		                                	<a href="?del={$item.uniqueid}">
+		                                		<i class="icon-remove"></i> Delete
+		                                	</a>
+                                    	</td>
+                                    </tr>
+                                {/foreach}     
+ 
+				</tbody>
+		</table>
+            </div>
+            {/if}
+            
+            
+	</div>
+   </div>
+ 
+ 
+
+ 				{literal}
+				<script type="text/javascript" charset="utf-8">
+					$(document).ready(function() {
+    					oTable = $('#example').dataTable({
+        				"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+        				"sPaginationType": "bootstrap",        				 
+        				"oLanguage": {
+					      "sSearch": "{/literal}{$lang.filterRecords}{literal}:",
+					      "sLengthMenu": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {/literal}{$lang.display}{literal} _MENU_ {/literal}{$lang.records}{literal}",
+					      "sInfo": "{/literal}{$lang.gotAtotal}{literal} _TOTAL_ {/literal}{$lang.entriesToshow}{literal} (_START_ - _END_)"
+					    }					    
+        				});
+    				} );
+    			</script>
+    			{/literal}
+{include file="footer.html"}

@@ -1,0 +1,30 @@
+	    <div class="span2 offset1"> 	    
+ 	 {foreach item=i from=$hooks->addsideblock|@sortby:"#prio"}
+	 	{if $i.id eq 'defaultSearchbox'}
+         <div class="base-block">         
+ 		  <div class="title">{$lang.searchDynamic}</div>
+               	  <form class="form-search" name="form1" method="get" action="{$getConfigs.baseurl}/search/">
+					<div class="input-prepend">
+					 
+					<input type="text" name="searchPaste" class="span12">
+					<input type="hidden" name="searchToken">
+					</div>
+               	  </form>    
+         </div>         
+		{elseif $i.id eq 'defaultSidebar'}
+         <div class="base-block">
+ 		  <div class="title">{$lang.recentPastes}</div>
+ 		  
+				    <ul class="nav nav-list">
+				      {foreach key=key item=item from=$getPastes}	
+				      <li>
+				      <a href="{$getConfigs.baseurl}/{$item.uniqueid}"> <i class="icon-file"></i>{$item.title}</a> <small>{$item.date}</small>
+				      </li>
+				      {/foreach}
+				    </ul>   
+        </div><!--/base-block-->
+	 	{else}	 	
+	 		{$i.title}
+	 	{/if}
+	 {/foreach}        
+       </div> 

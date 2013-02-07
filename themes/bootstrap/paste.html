@@ -1,0 +1,28 @@
+{include file="header.html" title=$hooks->title->title_paste}
+
+      <div class="row-fluid">
+			{include file="sidebar.html"} 
+        <div class="span8"> 
+      		<div class="base-block">          
+ 				<div class="title">{$getPaste.title}</div>
+      
+					  {foreach item=i from=$hooks->add_contentPaste|@sortby:"#prio"}
+					 	{if $i.id eq 'defaultpaste'}	 	
+								{if empty($result)} 
+								        <div class="error-page">
+								            <h2 class="red">Opps... Paste Not Avaible ! </h2>
+								        </div>
+								{else}				  
+								 	{$result} 
+								{/if}				
+						 	{else}	 	
+					 		{$i.content}
+					 	{/if}
+					 {/foreach}	
+	 
+	 		
+			</div>	
+        </div><!--/span-->
+      </div><!--/row-->
+       
+{include file="footer.html"}

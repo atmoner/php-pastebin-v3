@@ -1,0 +1,56 @@
+{include file="header.html" title=Pastes} 
+ 
+      <div class="row-fluid">
+			{include file="admin.sidebar.html"} 
+        <div class="span8"> 
+ 
+ 
+ 
+             <div class="base-block">
+              <div class="title">{#searchDynamic#}</div>      
+ 		
+
+		<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">                          
+				<thead>
+				    				<tr>
+                                        <th>Plugin</th>
+                                        <th>Version</th>
+                                        <th>Description</th>
+                                        <th>Action</th> 
+                                    </tr>
+                               	</thead>
+                                
+                                <tbody>
+                                
+                                {foreach key=key item=item from=$api} 
+                                    <tr class="gradeA">
+                                    	<td class="center">{$item.Name}</td>
+                                    	<td class="center">{$item.Version}</td>
+                                    	<td class="center">{$item.Description}<br /> Version {$item.Version} | Author <a href="{$item.AuthorURI}" title="Visit author homepage" target="_blank">{$item.Author}</a> | <a href="{$item.AuthorURI}" title="Author Website" target="_blank">Visit author homepage</a></td>
+                                    	<td class="center">{$item.linkAdd}</td>
+                                    </tr>
+                                {/foreach}     
+ 
+				</tbody>
+		</table>
+            </div> 
+ 
+        </div><!--/span-->
+      </div><!--/row-->
+  				{literal}
+				<script type="text/javascript" charset="utf-8">
+					$(document).ready(function() {
+    					oTable = $('#example').dataTable({
+    					"oSearch": {"sSearch": "{/literal}{if isset($smarty.post.searchPaste)}{$smarty.post.searchPaste}{/if}{literal}"},
+        				"sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+        				"sPaginationType": "bootstrap",        				 
+        				"oLanguage": {
+					      "sSearch": "{/literal}{$lang.filterRecords}{literal}:",
+					      "sLengthMenu": "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {/literal}{$lang.display}{literal} _MENU_ {/literal}{$lang.records}{literal}",
+					      "sInfo": "{/literal}{$lang.gotAtotal}{literal} _TOTAL_ {/literal}{$lang.entriesToshow}{literal} (_START_ - _END_)"
+					    }					    
+        				});
+    				} );
+    			</script>
+    			{/literal}      
+{include file="footer.html"}

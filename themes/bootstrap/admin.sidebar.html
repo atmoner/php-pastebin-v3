@@ -1,0 +1,46 @@
+<div class="span2 offset1">
+         <div class="base-block">         
+ 		  <div class="title">Admin cp</div>
+ 
+ 
+            <div id="sidemenu">
+            	<ul class="nav nav-list">
+ 
+ 	            <li>
+ 	            	<a href="{$getConfigs.baseurl}/admincp/settings/">
+ 	            		<i class="icon-wrench"></i> {$lang.adminsettings}
+ 	           		</a>
+ 	            </li>
+ 	            <li>
+ 	            	<a href="{$getConfigs.baseurl}/admincp/users/">
+ 	            		<i class="icon-user"></i> {$lang.adminusers}
+ 	            	</a>
+ 	            </li>                   
+ 	            <li>
+	 	            <a href="{$getConfigs.baseurl}/admincp/pastes/">
+	 	            	<i class="icon-file"></i> {$lang.adminpastes}
+	 	            </a>
+ 	            </li>  
+ 
+ 
+ 	            		<li>
+ 	            			<a href="{$getConfigs.baseurl}/admincp/plugins/">
+ 	            				 <i class="icon-magnet"></i> {$lang.adminplugins}
+ 	            			</a>
+ 	            		</li>
+ 	            		{if !empty($hooks->linkplug)}
+	 	            		{foreach item=i from=$hooks->linkplug|@sortby:"#prio"}
+	 	            		<li>
+	 	            			<a href="{$getConfigs.baseurl}/{$i.link}/">
+	 	            				<img src="{$getConfigs.baseurl}/themes/default/img/icons/sidemenu/magnify.png" width="16" height="16" alt="icon"/>{$i.title}
+	 	            			</a>
+	 	            		</li> 	            		
+	 	            		{/foreach}
+ 	            		{/if}
+ 	            	</ul>
+ 
+ 
+            </div>   
+        </div>
+        </div>
+ 

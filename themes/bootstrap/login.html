@@ -1,0 +1,38 @@
+{include file="header.html" title=$hooks->title->title_login}
+ 
+      <div class="row-fluid">
+			{include file="sidebar.html"} 
+        <div class="span8"> 
+
+            {if $errorLogin}
+                	 <br />
+            <div class="alert alert-error">
+                   	<b>{$lang.error} :</b> Login error !
+                   	<a href="#" class="close" data-dismiss="alert">&times;</a>
+            </div>
+            {/if} 
+
+  
+				   {foreach item=i from=$hooks->addcontentlogin|@sortby:"#prio"}
+					 	{if $i.id eq 'defaultLogin'}
+      					<div class="base-block">          
+ 							<div class="title">{$lang.registration}</div>  				
+								<div class="loginform"> 
+								   	  <form id="form1" name="form1" method="post" action="zone-login.html" enctype="multipart/form-data">
+									  	<label class="log-lab">{$lang.username}</label>
+										<input name="user" type="text" class="login-input-user" id="textfield" />
+									  	<label class="log-lab">{$lang.password}</label>
+										<input name="pass" type="password" class="login-input-pass" id="textfield" /><br />										 
+										<input type="submit" name="submit" value="{$lang.login}" class="btn"/>
+								   	  </form>	 
+								</div>
+							</div>	
+						{else}            
+			 	 			{$i.content}	 
+			 	 		{/if}            
+				   {/foreach}  
+
+        </div><!--/span-->
+      </div><!--/row-->
+ 
+{include file="footer.html"}

@@ -1,0 +1,53 @@
+{include file="header.html" title=$hooks->title->title_editaccount}
+      <div class="row-fluid">
+			{include file="sidebar.html"} 
+        <div class="span8"> 
+        
+            {if $errormail}
+                	 <br />
+            <div class="alert alert-error">
+                   	<b>{$lang.error} :</b> Your mail can not be empty !
+                   	<a href="#" class="close" data-dismiss="alert">&times;</a>
+            </div>
+            {/if} 
+            {if $syntaxmail}
+                	 <br />
+            <div class="alert alert-error">
+                   	<b>{$lang.error} :</b> your mail was not the right syntax !
+                   	<a href="#" class="close" data-dismiss="alert">&times;</a>
+            </div>
+            {/if}             
+ 
+					  
+      					<div class="base-block">          
+ 							<div class="title">{$lang.editInfo}</div>  	
+								<form method="post">
+									<fieldset>
+									    <legend>{$lang.avatarset}</legend>
+									    <img src='{$getGravatar}' class="img-rounded" /> <br /><br /><a href="http://gravatar.com/" target="_BLANK" class="btn btn-primary">Edit gravatar</a>
+										<legend>{$lang.mailsettings}</legend>
+											<input type="text" name="mail" value="{$getUserdata->mail}">
+											<label class="radio">
+											<input type="radio" name="showMail" id="showMail1" value="true" {if $getUserdata->seemail eq 'true'}checked{/if}>
+											{$lang.showmailconf}
+											</label>
+											<label class="radio">
+											<input type="radio" name="showMail" id="showMail2" value="false" {if $getUserdata->seemail eq 'false'}checked{/if}>
+											{$lang.notshowmailconf}
+											</label>
+
+										<legend>Additional information</legend>
+										<label>{$lang.userloc}</label>
+											<input type="text" name="location" value="{$getUserdata->location}"><br />
+										<label>{$lang.userweb}</label>
+											<input type="text" name="website" value="{$getUserdata->website}"><br />
+										<label>{$lang.userSigna}</label>
+											<textarea rows="3" name="signature">{$getUserdata->signature}</textarea><br />
+
+										<button type="submit" name="submit" class="btn btn-primary">{$lang.Submit}</button>
+									</fieldset>
+								</form>
+						</div>
+        </div><!--/span-->
+      </div><!--/row-->			
+{include file="footer.html"}
