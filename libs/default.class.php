@@ -366,6 +366,12 @@ class StartUp {
 	### 	
 	function addUser($name,$mail,$pass,$redirect='NULL',$sendMail='NULL',$isadmin="NULL") {
 		global $db,$conf;
+
+		$db->query("SELECT id FROM users WHERE id != '".$db->escape(0)."' AND mail='".$db->escape($mail)."' OR name='".$db->escape($name)."' ");
+		$user_details = $db->get_row();
+		
+		if (!$user_details) {
+		
 		$hash = $this->makeId(15);
 		if ($isadmin!="NULL")
 			$level = "4";
@@ -384,8 +390,10 @@ class StartUp {
     		if ($sendMail!='NULL')  
     		$this->sendMail($name,$mail,$pass,$hash);
      		if ($redirect!='NULL') 
-     			$this->redirect($conf['baseurl'].'/zone-login.html');     			
- 
+     			$this->redirect($conf['baseurl'].'/zone-login.html');    				
+			
+		} else
+			return false; 
 	}
 	###
 	function EditUserInfo($pass='',$mail,$seemail,$location,$website,$sign) {

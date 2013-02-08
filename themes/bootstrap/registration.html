@@ -23,7 +23,14 @@
                    	<a href="#" class="close" data-dismiss="alert">&times;</a>
             </div>
             {/if} 
-                         
+             {if $UserOrMailexist}
+                	 <br />
+            <div class="alert alert-error">
+                   	<b>{$lang.error} :</b> Username or email address already exists! Try again... 
+                   	<a href="#" class="close" data-dismiss="alert">&times;</a>
+            </div>
+            {/if} 
+                                    
 	   {foreach item=i from=$hooks->addcontentregistration|@sortby:"#prio"}
 		 	{if $i.id eq 'defaultRegistration'}
       					<div class="base-block">          

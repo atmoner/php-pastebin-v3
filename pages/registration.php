@@ -40,7 +40,10 @@ if (isset($_POST['submit'])) {
         if ($startUp->checkMail($_POST['mail'])) {
                 if (!empty($_POST['user'])) { 
                 	if (!empty($_POST['pass'])) { 
-                        $startUp->addUser($_POST['user'],$_POST['mail'],$_POST['pass'],true,true);
+                		// Check if data is save else we make an error
+                        if (!$startUp->addUser($_POST['user'],$_POST['mail'],$_POST['pass'],'true','true')) {
+                        	$smarty->assign("UserOrMailexist",true);                        	
+                        }                        
                     } else 
                     		$smarty->assign("errorpass",true);
                 } else  
