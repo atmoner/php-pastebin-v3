@@ -704,6 +704,7 @@ class pasteUsers extends startUp {
 	###
 	function redirect($location='index.php'){
 		header("location:".$location);
+		exit; // Merci fr0g!
 	}
 	//Obscure
 	function obscure($password, $algorythm = "sha1"){
