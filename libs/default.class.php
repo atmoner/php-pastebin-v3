@@ -42,7 +42,18 @@ class StartUp {
 	function __construct() {
 		session_start();
 		header("Content-type:text/html; charset=".$this->charset."");
+		$this->checkInstallFile();		
 		$this->cleandata();
+	}
+	###
+	function checkInstallFile() {
+		global $smarty,$path;
+		if (file_exists($path."/install.php")) {
+			if (filesize($path."/libs/db.php") != 0) {
+				$smarty->assign('errorInstallFile',true);
+			} 
+		} else
+			$smarty->assign('errorInstallFile',false);	
 	}
 	###
 	function cGet($get) {

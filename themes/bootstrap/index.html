@@ -8,7 +8,14 @@
       <div class="row-fluid">
 			{include file="sidebar.html"} 
         <div class="span8">
-
+            {if $errorInstallFile}
+                	 <br />
+            <div class="alert alert-error">
+                   	<b>{$lang.error} :</b> Attention! Your file install.php exists. Your site is not secure. Delete it as soon as possible
+                   	<a href="#" class="close" data-dismiss="alert">&times;</a>
+            </div>
+            {/if}  
+            
             {if isset($errorPaste)}
                	 	<br />
             <div class="alert alert-error">
