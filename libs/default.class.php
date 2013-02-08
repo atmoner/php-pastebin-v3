@@ -705,12 +705,6 @@ class pasteUsers extends startUp {
 	function redirect($location='index.php'){
 		header("location:".$location);
 	}
-	###
-	function killAll(){
-		$this->username = "";
-		$this->password = "";
-		// die('Please don\'t hack us.');
-	}
 	//Obscure
 	function obscure($password, $algorythm = "sha1"){
 		$password = strtolower($password);
