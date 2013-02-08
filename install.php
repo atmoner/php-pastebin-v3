@@ -11,7 +11,14 @@ Website: http://atmoner.com/
 Contact: contact@atmoner.com
 */
 
-session_start(); ?>
+session_start(); 
+$path = dirname(__FILE__);
+
+if (filesize($path."/libs/db.php") != 0) {
+	header("location:index.php");		
+}  
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -27,8 +34,6 @@ session_start(); ?>
 </div>
 <br /><br />
 <?php
-
-$path = dirname(__FILE__);
 
 if (empty($_GET["step"])) {
 echo "<div class='section_box'>Welcome to the installation of Php-pastebin V3.<br />
