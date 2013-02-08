@@ -196,7 +196,7 @@ class StartUp {
 		$sql .= "ORDER BY p.date DESC LIMIT 0,$limit ";
  
 		$items = $db->get_results($sql);
- 
+	 	if ($items) { 
 		foreach ($items as $obj) {
         		$array[$obj->id]['id'] = $obj->id;
         		$array[$obj->id]['uniqueid'] = $obj->uniqueid;
@@ -209,8 +209,10 @@ class StartUp {
            		$array[$obj->id]['hits'] = $obj->hits; 
            		$array[$obj->id]['name'] = $obj->name; 
 	        }
-		$smarty->assign('getPastes',$array);
-		return $array;
+			$smarty->assign('getPastes',$array);	
+			return $array;
+	 	} else
+	 		return false;	   		
 	}
 	function getMyPastes() {
 		global $db;
