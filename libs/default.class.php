@@ -648,7 +648,7 @@ class pasteUsers extends startUp {
 		$query .= " INNER JOIN statuts ON u.level=statuts.id";
 		$items = $db->get_results($query);
 		foreach ( $items as $obj ) {
-        		$array[$obj->id]['id'] = $obj->id;
+        			$array[$obj->id]['id'] = $obj->id;
             		$array[$obj->id]['name'] = $this->Fuckxss($obj->name);
             		$array[$obj->id]['mail'] = $this->Fuckxss($obj->mail);
             		$array[$obj->id]['level'] = $this->Fuckxss($obj->level);            		
@@ -667,17 +667,16 @@ class pasteUsers extends startUp {
     		$db->query($query);
 	return true;
 	} 
-
 	###
 	function checkCookie(){
-		
+		global $db;
 		if (isset($_COOKIE["$this->session_name"]) || isset($_SESSION["$this->session_name"])) {
  
 			$cookie = explode(",",$_COOKIE["$this->session_name"]);
  
-			$this->session_username = $cookie['0'];
-			$this->session_password = $cookie['1'];
-			$this->uid = $cookie['2'];
+			$this->session_username = $db->escape($cookie['0']);
+			$this->session_password = $db->escape($cookie['1']);
+			$this->uid = $db->escape($cookie['2']);
 			return true;
 		} else {
 			return false;
