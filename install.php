@@ -64,9 +64,9 @@ $i = 0;
 $error = "";
 while($i < count($path)){
 if (is_writable($path[$i]))
-echo '- '.$path[$i].' -> <font color="green">The file is writable</font><br />';
+echo '- '.$path[$i].' -> <font color="green">The file/folder is writable</font><br />';
 else {
-echo '- '.$path[$i].' -> <font color="red">The file is not writable</font><br />';
+echo '- '.$path[$i].' -> <font color="red">The file/folder is not writable</font><br />';
 $error .= "1";
 }
 $i++;
