@@ -5,7 +5,6 @@
 
 *   [What is Php-pastebin?](#what-is-php-pastebin "What is Php-pastebin?")
 *   [How to install php-pastebin?](#how-to-install-php-pastebin "How to install php-pastebin?")
-*   [How to create my first plugin?](#how-to-create-my-first-plugin "How to create my first plugin?")
 *   [Demonstration](#demonstration "Demonstration")
 
 ### What is Php-pastebin? ###
@@ -26,4 +25,10 @@ To install php-pastebin, you do not need much!
 3.  mod_rewrite enabled on your apache web server (see it in your phpinfo())  
 
 To begin, send your file on ftp and open your browser to the selected domain name, you should see the installation page.   
+Follow the installation instructions.
 
+Once the installation is complete, you must delete the install.php file, libs/db.sql and put a chmod 644 on the file libs/db.php
+
+### Demonstration ###
+
+[Demonstration](http://demo.php-pastebin.com/ "Demonstration")
