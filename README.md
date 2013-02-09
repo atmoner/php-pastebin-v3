@@ -41,4 +41,5 @@ For safety tests, I thank:
 
 *   [@fr0gSecurity](https://twitter.com/fr0gSecurity "@fr0gSecurity")
 *   [@5ct34m](https://twitter.com/5ct34m "@5ct34m")
+*   [@BinarySecurity ](https://twitter.com/BinarySecurity "@BinarySecurity ")
 
