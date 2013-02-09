@@ -40,6 +40,7 @@ Once the installation is complete, you must delete the install.php file, libs/db
 For safety tests, I thank:
 
 *   [@fr0gSecurity](https://twitter.com/fr0gSecurity "@fr0gSecurity")
+*   [kallimero](http://hwc-crew.org/ "kallimero")
 *   [@5ct34m](https://twitter.com/5ct34m "@5ct34m")
 *   [@BinarySecurity ](https://twitter.com/BinarySecurity "@BinarySecurity ")
 
