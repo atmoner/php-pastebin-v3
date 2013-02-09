@@ -178,7 +178,7 @@ switch (isset($_GET["page"])?$_GET["page"]:""){
 		if ($hook->hook_exist('new_page'))  
 				$hook->execute_hook('new_page'); 
 		else 
-			die('404');
+			$startUp->redirect($conf['baseurl'].'/');
         break;
 }  
 
