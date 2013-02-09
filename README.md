@@ -6,6 +6,8 @@
 *   [What is Php-pastebin?](#what-is-php-pastebin "What is Php-pastebin?")
 *   [How to install php-pastebin?](#how-to-install-php-pastebin "How to install php-pastebin?")
 *   [Demonstration](#demonstration "Demonstration")
+*   [Thanks](#thanks "Thanks")
+
 
 ### What is Php-pastebin? ###
 
@@ -32,3 +34,11 @@ Once the installation is complete, you must delete the install.php file, libs/db
 ### Demonstration ###
 
 [Demonstration](http://demo.php-pastebin.com/ "Demonstration")
+
+### Thanks ###
+
+For safety tests, I thank:
+
+*   [@fr0gSecurity](https://twitter.com/fr0gSecurity "@fr0gSecurity")
+*   [@5ct34m](https://twitter.com/5ct34m "@5ct34m")
+
