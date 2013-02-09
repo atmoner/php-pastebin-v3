@@ -141,11 +141,11 @@ class StartUp {
 			  '".$db->escape($userid)."',
 			  '".$this->makeId()."',
 			  '".$db->escape($title)."',
-			  '$lang',
+			  '".$db->escape($lang)."',
 			  '".htmlspecialchars(mysql_escape_string($paste))."',
 			  '$date',
-			  '$expire',
-			  '$exposure'
+			  '".$db->escape($expire)."',
+			  '".$db->escape($exposure)."'
 			  )";
     		$db->query($query);
     		$id = $db->insert_id;
