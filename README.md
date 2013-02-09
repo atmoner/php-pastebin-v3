@@ -46,4 +46,4 @@ For safety tests, thanks to:
 
 For Debug, thanks to:
 
-*   [@QuentinF_](https://twitter.com/@QuentinF "@QuentinF_ ")
+*   [QuentinF_](https://twitter.com/QuentinF_ "QuentinF_")
