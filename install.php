@@ -14,9 +14,9 @@ Contact: contact@atmoner.com
 session_start(); 
 $path = dirname(__FILE__);
 
-if (filesize($path."/libs/db.php") != 0) {
+/* if (filesize($path."/libs/db.php") != 0) {
 	header("location:index.php");		
-}  
+}  */
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
