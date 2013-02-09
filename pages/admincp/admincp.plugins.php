@@ -48,7 +48,7 @@ switch ($action) {
 
 	case "deactivate" :
 		$db->query("UPDATE plugins SET action='0' WHERE filename= '".$_GET ['filename']."'");
-		$startUp->redirect('/admincp/plugins/');
+		$startUp->redirect('/admincp/plugins/?tokenAdmin='.$_COOKIE['tokenAdmin']);
 		break;
 	case "activate" :
 		$count = count (getPlugins('filename',$_GET ['filename']));
@@ -60,7 +60,7 @@ switch ($action) {
 			// do_sqlquery("UPDATE plugins SET action='1' WHERE filename= '".$_GET ['filename']."'",true);
 			$db->query("UPDATE plugins SET action='1' WHERE filename= '".$_GET ['filename']."'");
 		}
-		$startUp->redirect('/admincp/plugins/');		
+		$startUp->redirect('/admincp/plugins/?tokenAdmin='.$_COOKIE['tokenAdmin']);		
 		break;
 }
  
@@ -89,10 +89,10 @@ $i=0;
 		$api[$i]["AuthorURI"]=$plugin_header['AuthorURI'];
 		$api[$i]["Author"]=$plugin_header['Author'];
 		if ($action) {
-			$api[$i]["linkAdd"]='<i class="icon-minus-sign"></i> <a href="?action=deactivate&filename=' . $plugin_header['filename'] . '" title="DESACTIVATE">Desactivate</a>';
+			$api[$i]["linkAdd"]='<i class="icon-minus-sign"></i> <a href="?action=deactivate&filename=' . $plugin_header['filename'] . '&tokenAdmin='.$_COOKIE['tokenAdmin'].'" title="DESACTIVATE">Desactivate</a>';
 			$api[$i]["Use"]='Use it !';
 			} else {
-			$api[$i]["linkAdd"]='<i class="icon-ok-sign"></i> <a href="?action=activate&filename=' . $plugin_header['filename'] . '" title="ACTIVATE">Activate</a>';
+			$api[$i]["linkAdd"]='<i class="icon-ok-sign"></i> <a href="?action=activate&filename=' . $plugin_header['filename'] . '&tokenAdmin='.$_COOKIE['tokenAdmin'].'" title="ACTIVATE">Activate</a>';
 			$api[$i]["Use"]='';			 
    		}
    

@@ -100,10 +100,10 @@
 		                                	<a href="{$getConfigs.baseurl}/{$item.uniqueid}" target="_BLANK">
 		                                		<i class="icon-eye-open"></i> View
 		                                	</a> 
-		                                	<a href="?edit={$item.uniqueid}">
+		                                	<a href="?edit={$item.uniqueid}&tokenAdmin={$smarty.cookies.tokenAdmin}">
 		                                		<i class="icon-search"></i> Edit
 		                                	</a> 
-		                                	<a href="?del={$item.uniqueid}">
+		                                	<a href="?del={$item.uniqueid}&tokenAdmin={$smarty.cookies.tokenAdmin}">
 		                                		<i class="icon-remove"></i> Delete
 		                                	</a>
                                     	</td>

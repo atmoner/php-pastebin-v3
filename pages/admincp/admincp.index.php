@@ -32,6 +32,14 @@
 if (!defined("IN_PASTE"))
       die("Access denied!");
 
+if (!isset($_COOKIE['tokenAdmin']) 
+	|| empty($_COOKIE['tokenAdmin']) 
+	|| !isset($_GET['tokenAdmin']) 
+	|| empty($_GET['tokenAdmin']) 
+	|| $_GET['tokenAdmin'] != $_COOKIE['tokenAdmin']
+) 
+        $startUp->redirect('/');
+
 if ($startUp->checkAdmin() === false)
         $startUp->redirect('/');
     

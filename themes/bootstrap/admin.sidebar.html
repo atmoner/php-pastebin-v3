@@ -7,31 +7,31 @@
             	<ul class="nav nav-list">
  
  	            <li>
- 	            	<a href="{$getConfigs.baseurl}/admincp/settings/">
+ 	            	<a href="{$getConfigs.baseurl}/admincp/settings/?tokenAdmin={$smarty.cookies.tokenAdmin}">
  	            		<i class="icon-wrench"></i> {$lang.adminsettings}
  	           		</a>
  	            </li>
  	            <li>
- 	            	<a href="{$getConfigs.baseurl}/admincp/users/">
+ 	            	<a href="{$getConfigs.baseurl}/admincp/users/?tokenAdmin={$smarty.cookies.tokenAdmin}">
  	            		<i class="icon-user"></i> {$lang.adminusers}
  	            	</a>
  	            </li>                   
  	            <li>
-	 	            <a href="{$getConfigs.baseurl}/admincp/pastes/">
+	 	            <a href="{$getConfigs.baseurl}/admincp/pastes/?tokenAdmin={$smarty.cookies.tokenAdmin}">
 	 	            	<i class="icon-file"></i> {$lang.adminpastes}
 	 	            </a>
  	            </li>  
  
  
  	            		<li>
- 	            			<a href="{$getConfigs.baseurl}/admincp/plugins/">
+ 	            			<a href="{$getConfigs.baseurl}/admincp/plugins/?tokenAdmin={$smarty.cookies.tokenAdmin}">
  	            				 <i class="icon-magnet"></i> {$lang.adminplugins}
  	            			</a>
  	            		</li>
  	            		{if !empty($hooks->linkplug)}
 	 	            		{foreach item=i from=$hooks->linkplug|@sortby:"#prio"}
 	 	            		<li>
-	 	            			<a href="{$getConfigs.baseurl}/{$i.link}/">
+	 	            			<a href="{$getConfigs.baseurl}/{$i.link}/?tokenAdmin={$smarty.cookies.tokenAdmin}">
 	 	            				<img src="{$getConfigs.baseurl}/themes/default/img/icons/sidemenu/magnify.png" width="16" height="16" alt="icon"/>{$i.title}
 	 	            			</a>
 	 	            		</li> 	            		

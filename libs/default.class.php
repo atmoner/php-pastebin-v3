@@ -693,19 +693,22 @@ class pasteUsers extends startUp {
 	###
 	function setSession($username,$password,$cookie){
 		global $db;
-			$query = "SELECT id FROM ".$this->prefix_db."users WHERE name = '".$db->escape($username)."' AND pass = '".$this->obscure($password)."' AND level > '0' LIMIT 1;";
-			$row = $db->get_row($query,ARRAY_A); // get result in array (ARRAY_A)
-			
+			$query = "SELECT id, level FROM ".$this->prefix_db."users WHERE 
+							name = '".$db->escape($username)."' AND pass = '".$this->obscure($password)."' AND level > '0' LIMIT 1;";
+		$row = $db->get_row($query,ARRAY_A); // get result in array (ARRAY_A)	
 				
 		$values = array($username,$this->obscure($password),$row['id']);
-		// $values = array($username,$passwords,$row['id']);
 		$session = implode(",",$values);
 		if($cookie=='on'){
-			//cookies
 			setcookie("$this->session_name", $session, time()+60*60*24*100,'/');
 		} else {
 			$_SESSION["$this->session_name"] = $session;
 		}
+		// Gestion du token
+		if ($row['level'] === '4'){		
+			setcookie("tokenAdmin", uniqid(rand(), true), time()+60*60*24*100,'/');
+		}
+		setcookie("token", uniqid(rand(), true), time()+60*60*24*100,'/');		 		
 	}
 	###
 	function sqlesc($x) {
@@ -715,6 +718,8 @@ class pasteUsers extends startUp {
 	function logout($redirect=true){
 		global $conf;
 		setcookie("$this->session_name", "", time()-60*60*24*100, "/");
+		setcookie("tokenAdmin", "", time()-60*60*24*100, "/");
+		setcookie("token", "", time()-60*60*24*100, "/");
 		unset($_SESSION["$this->session_name"]);
 		session_unset();
 		if($redirect===true){

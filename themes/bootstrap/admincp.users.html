@@ -142,11 +142,11 @@
 		                                	<a href="{$getConfigs.baseurl}/user/{$info.name}/" target="_BLANK">
 		                                		<i class="icon-eye-open"></i> View
 		                                	</a> 
-		                                	<a href="?edit={$info.id}">
+		                                	<a href="?edit={$info.id}&tokenAdmin={$smarty.cookies.tokenAdmin}">
 		                                		<i class="icon-search"></i> Edit
 		                                	</a> 
 		                                	{if $info.id neq '1'}
-		                                	<a href="?del={$info.id}">
+		                                	<a href="?del={$info.id}&tokenAdmin={$smarty.cookies.tokenAdmin}">
 		                                	{/if}
 		                                		<i class="icon-remove"></i> Delete
 		                                	{if $info.id neq '1'}	

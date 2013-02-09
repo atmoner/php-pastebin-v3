@@ -81,10 +81,10 @@
                 	<li><a href="{$getConfigs.baseurl}/zone-login.html">{$lang.login}</a></li>
                 	{elseif $i.id eq 'admincp'}
                 	<li class="nav-header">Admin panel</li>
-                	<li><a href="{$getConfigs.baseurl}/admincp.html"><i class="icon-wrench"></i> {$lang.adminsettings}</a></li>
-                	<li><a href="{$getConfigs.baseurl}/admincp/users/"><i class="icon-user"></i> {$lang.adminusers}</a></li>   
-                	<li><a href="{$getConfigs.baseurl}/admincp/pastes/"><i class="icon-file"></i> {$lang.adminpastes}</a></li>
-                	<li><a href="{$getConfigs.baseurl}/admincp/plugins/"><i class="icon-magnet"></i> {$lang.adminplugins} </a></li>             	
+                	<li><a href="{$getConfigs.baseurl}/admincp.html?tokenAdmin={$smarty.cookies.tokenAdmin}"><i class="icon-wrench"></i> {$lang.adminsettings}</a></li>
+                	<li><a href="{$getConfigs.baseurl}/admincp/users/?tokenAdmin={$smarty.cookies.tokenAdmin}"><i class="icon-user"></i> {$lang.adminusers}</a></li>   
+                	<li><a href="{$getConfigs.baseurl}/admincp/pastes/?tokenAdmin={$smarty.cookies.tokenAdmin}"><i class="icon-file"></i> {$lang.adminpastes}</a></li>
+                	<li><a href="{$getConfigs.baseurl}/admincp/plugins/?tokenAdmin={$smarty.cookies.tokenAdmin}"><i class="icon-magnet"></i> {$lang.adminplugins} </a></li>             	
                 	{elseif $i.id eq 'usercp'}
                 	<li class="nav-header">User panel</li>
                 	<li><a href="{$getConfigs.baseurl}/account.html"><i class="icon-cog"></i> {$lang.accountSettings}</a></li>
