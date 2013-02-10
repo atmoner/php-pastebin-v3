@@ -279,8 +279,8 @@ else {
 echo "Your install is ok ! <br />";
 echo "Thinks to: <br /><br />";
 echo "- remove install.php of your ftp <br />";
-echo "- remove inc/db.sql <br />";	
-echo "- chmod 644 inc/db.php";
+echo "- remove libs/db.sql <br />";	
+echo "- chmod 644 libs/db.php";
 echo "<br /><br /><a href=\"/\" target=\"_blank\" class=\"button\">Go to your website</a>";
         }
 }
