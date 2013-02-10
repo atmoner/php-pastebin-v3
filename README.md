@@ -36,16 +36,16 @@ Once the installation is complete, you must delete the install.php file, libs/db
 
 To update your version of php-pastebin, you must:  
 
-    1.  Delete old version
-        * Keep preciously files *libs/db.php* (which contains your login sql)
-        * Delete all files of your FTP 
-    2.  Upload New version
-        * Upload the v3 of php-pastebin on your FTP
-        * Replace db.php with your
-    3.  Download [upgrade.php](http://wiki.php-pastebin.com/_media/upgrade.php "upgrade.php") and add it at root of your script   
-        * Go on your navigator and open upgrade.php
-        * Click on "Upgrade v2 to v3 now!"
-    4.  Remove upgrade.php and go on your website
+   1.  Delete old version
+    * Keep preciously files *libs/db.php* (which contains your login sql)
+    * Delete all files of your FTP 
+   2.  Upload New version
+    * Upload the v3 of php-pastebin on your FTP
+    * Replace db.php with your
+   3.  Download [upgrade.php](http://wiki.php-pastebin.com/_media/upgrade.php "upgrade.php") and add it at root of your script   
+    * Go on your navigator and open upgrade.php
+    * Click on "Upgrade v2 to v3 now!"
+   4.  Remove upgrade.php and go on your website
 
 ### Demonstration ###
 
