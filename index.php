@@ -156,11 +156,6 @@ switch (isset($_GET["page"])?$_GET["page"]:""){
                 include 'pages/logout.php';
         break;
 
-        case 'sitemap': 
-                # sitemap
-                include 'pages/sitemap.php';
-        break; 
-
         case 'error': 
                 # error
                 $smarty->display('error.html');
