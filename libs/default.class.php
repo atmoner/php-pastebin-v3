@@ -170,7 +170,7 @@ class StartUp {
     function delPaste($key){
     	global $db,$conf;
     		$db->query("DELETE FROM pastes WHERE uniqueid = '".$db->escape($key)."'");
-            $this->redirect($conf['baseurl'].'/admincp/pastes/');           
+            $this->redirect($conf['baseurl'].'/admincp/pastes/?tokenAdmin='.$_COOKIE['tokenAdmin']);           
     }	
 	###
 	function getStatuts(){	
@@ -195,8 +195,8 @@ class StartUp {
     function delUser($key){
    		 global $db,$conf;
     		$db->query("DELETE FROM ".$this->prefix_db."users WHERE id = '".$db->escape($key)."'");
-    		$db->query("DELETE FROM ".$this->prefix_db."pastes WHERE userid = '".$db->escape($key)."'");
-        $this->redirect($conf['baseurl'].'/admincp/users/');            
+    		$db->query("DELETE FROM ".$this->prefix_db."pastes WHERE userid = '".$db->escape($key)."'");        
+        $this->redirect($conf['baseurl'].'/admincp/users/?tokenAdmin='.$_COOKIE['tokenAdmin']);             
         }
 	###
 	function getPastes($limit=10){	
