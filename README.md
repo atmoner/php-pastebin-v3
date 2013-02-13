@@ -16,7 +16,7 @@
 > If you're not familiar with the idea, most people use it like this:  
 
 *   Submit a code fragment to Php-pastebin,  
-*   Getting a url like http://demo.php-pastebin.com/DSNnglex,
+*   Getting a url like http://demo.php-pastebin.com/4lqbxycs,
 *   paste the url into an IRC or IM conversation, someone responds by reading and perhaps submitting a modification of your code, you then view the modification, maybe using the built in diff tool to help locate the changes
 
 ### How to install php-pastebin? ###
