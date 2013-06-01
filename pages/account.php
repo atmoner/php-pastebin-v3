@@ -38,7 +38,9 @@ $startUp->isLoggedAcount();
 if (isset($_GET['delPaste']) && is_numeric($_GET['delPaste'])) {
 	$startUp->deleteMypaste($_GET['delPaste']);
 } 
-$getUserdata = $startUp->getUserdata();
+
+$getUserdata = $startUp->getMydata();
+ 
 $smarty->assign("getUserdata",$getUserdata);
 $smarty->assign("countUserpastes",$startUp->getUserpastes($userId)); 
 $smarty->assign("getMyPastes",$startUp->getMyPastes());

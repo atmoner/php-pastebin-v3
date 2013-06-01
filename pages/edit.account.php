@@ -51,7 +51,7 @@ if (isset($_POST['submit'])) {
 } 
 		
  	
-$getUserdata = $startUp->getUserdata();
+$getUserdata = $startUp->getMydata();
 $smarty->assign("getUserdata",$getUserdata);
 $smarty->assign("getGravatar",$startUp->get_gravatar($getUserdata->mail));
 

@@ -3,8 +3,21 @@
 			{include file="sidebar.html"} 
         <div class="span8"> 
 
+ {if !$getUserdata }
+      					<div class="base-block">          
+ 							<div class="title">{$lang.userdetailof} {$getUserdata->name}</div>  				
+						<div class="row-fluid">
  
- 
+						<div class="span4">
+							<h5>No data available!</h5>
+  
+						</div>
+								
+	 
+						</div>
+					</div>	
+ {else}
+
       					<div class="base-block">          
  							<div class="title">{$lang.userdetailof} {$getUserdata->name}</div>  				
 						<div class="row-fluid">
@@ -78,7 +91,7 @@
 								</table>
  
 							</div>	 
- 
+  {/if}
 
         </div><!--/span-->
       </div><!--/row-->

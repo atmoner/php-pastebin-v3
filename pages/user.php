@@ -32,9 +32,12 @@
 
 if (!defined("IN_PASTE"))
       die("Access denied!");
+      
+if (!isset($_GET['act']))
+	$startUp->redirect($conf['baseurl']);
 
 $getUserdata = $startUp->getUserdata($_GET['act']);
-
+ 
 $hook->set_title('title_user', $getUserdata->name .' detail'); 
 $hook->addJs('dataTables','jquery.dataTables.js','themes/bootstrap/js/','2');
 $hook->addJs('datatablesjs','datatables.js','themes/bootstrap/js/','3');

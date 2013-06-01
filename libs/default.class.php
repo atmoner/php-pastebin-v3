@@ -605,22 +605,16 @@ class pasteUsers extends startUp {
 		}
 	}
 	###
-	function getUserdata($uid=FALSE){
+	function getUserdata($uid){
 		global $db;
-		if($uid==FALSE){
-			$id = $this->uid;
-			$where = "WHERE u.id = '".$db->escape($this->uid)."' ";	
-		} elseif (!is_numeric($uid)) {
-			$where = "WHERE u.name = '".$db->escape($uid)."' ";		
-		} else {
-			$where = "WHERE u.id = '".$db->escape($uid)."' ";
-		}
+ 
 		 
 				$query = "SELECT u.id, u.name, u.mail, u.level, u.signature, u.seemail, u.location, u.website, statuts.id, statuts.level, statuts.maxlines FROM ".$this->prefix_db."users AS u";
 				$query .= " INNER JOIN statuts ON u.level=statuts.id";
-				$query .= " $where LIMIT 1";
+				$query .= " WHERE u.name = '".$db->escape($uid)."' LIMIT 1";
     		$user = $db->get_row($query,OBJECT); // get result in objet (OBJECT)
  
+ 			if ($user) {
 			$user->id = $this->Fuckxss($user->id); 
  			$user->name = $this->Fuckxss($user->name);
  			$user->mail = $this->Fuckxss($user->mail);
@@ -629,7 +623,36 @@ class pasteUsers extends startUp {
  			$user->location = $this->Fuckxss($user->location);	
  			$user->website = $this->Fuckxss($user->website);
  
-		return $user;
+			return $user;
+ 				
+ 			} else
+ 			return false;
+
+	}
+	###
+	function getMydata($uid){
+		global $db;
+ 
+		 
+				$query = "SELECT u.id, u.name, u.mail, u.level, u.signature, u.seemail, u.location, u.website, statuts.id, statuts.level, statuts.maxlines FROM ".$this->prefix_db."users AS u";
+				$query .= " INNER JOIN statuts ON u.level=statuts.id";
+				$query .= " WHERE u.id = '".$db->escape($this->uid)."' LIMIT 1";
+    		$user = $db->get_row($query,OBJECT); // get result in objet (OBJECT)
+ 
+ 			if ($user) {
+			$user->id = $this->Fuckxss($user->id); 
+ 			$user->name = $this->Fuckxss($user->name);
+ 			$user->mail = $this->Fuckxss($user->mail);
+ 			$user->level = $this->Fuckxss($user->level);
+ 			$user->signature = $this->Fuckxss($user->signature);	
+ 			$user->location = $this->Fuckxss($user->location);	
+ 			$user->website = $this->Fuckxss($user->website);
+ 
+			return $user;
+ 				
+ 			} else
+ 			return false;
+
 	}
 	###
 	function getUserpastes($where=FALSE){
