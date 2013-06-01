@@ -40,7 +40,7 @@ if (!isset($_COOKIE['tokenAdmin'])
 ) 
         $startUp->redirect('/');
 
-if ($startUp->checkAdmin() === false)
+if ($isAdmin === false)
         $startUp->redirect('/');
     
 $do = (isset($_GET["act"])?$_GET["act"]:"");

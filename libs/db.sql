@@ -222,6 +222,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `signature` varchar(250) NOT NULL,
   `location` varchar(50) NOT NULL,
   `website` varchar(200) NOT NULL,
+  `token` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
 

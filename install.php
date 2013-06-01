@@ -36,12 +36,14 @@ $path = dirname(__FILE__);
 <?php
 
 if (empty($_GET["step"])) {
-echo "<div class='section_box'>Welcome to the installation of Php-pastebin V3.<br />
-To install this scirpt, you must have:<br /><br />
-- server Web (<a href='http://en.wikipedia.org/wiki/Web_server' target='_BLANK'>more info</a>)<br />
-- server Mysql (<a href='http://en.wikipedia.org/wiki/MySQL' target='_BLANK'>more info</a>)</div><br /><br />
-<a href=\"install.php?step=1\" class=\"button\">Start installation</a> <br />
-";
+	if (empty($_GET["update"])) {
+		echo "<div class='section_box'>Welcome to the installation of Php-pastebin V3.<br />
+		To install this scirpt, you must have:<br /><br />
+		- server Web (<a href='http://en.wikipedia.org/wiki/Web_server' target='_BLANK'>more info</a>)<br />
+		- server Mysql (<a href='http://en.wikipedia.org/wiki/MySQL' target='_BLANK'>more info</a>)</div><br /><br />
+		<a href=\"install.php?step=1\" class=\"button\">Start installation</a> <a href=\"install.php?update=1\" class=\"button\">Start update</a><br />
+		";
+	}
 }
  
 function executeQueryFile($filesql) {
@@ -80,7 +82,38 @@ function redirect($location){
 header("location:".$location);
 }	
  
+if ($_GET["update"] == "1") {
+
+    require($path.'/libs/startup.php');
+				$query = "SELECT u.id, u.name, u.mail, u.level, u.signature, u.seemail, u.location, u.website, statuts.id, statuts.level, statuts.maxlines FROM ".$startUp->prefix_db."users AS u";
+				$query .= " INNER JOIN statuts ON u.level=statuts.id";
+				$query .= " WHERE u.id='1' LIMIT 1";
+    		$user = $db->get_row($query,OBJECT); // get result in objet (OBJECT) 
  
+    echo " <div class='section_box'><b><u>Update token admin account:</u></b><br /><br />";
+    echo "User: ".$user->name;
+    echo "<br />Mail: ".$user->mail;
+    echo "<br /><br /><a href=\"install.php?update=2\" class=\"button\">Update account</a> ";
+    
+ 
+} 
+
+if ($_GET["update"] == "2") {
+
+    require($path.'/libs/startup.php');
+				
+    $db->get_results("SELECT testt FROM users");
+	if (!$db->col_info) {
+		$db->query("ALTER TABLE `users` ADD `token` VARCHAR( 100 ) NOT NULL");
+	
+	}	
+	if ($db->query("UPDATE `users` SET `token` = '".$startUp->generateToken()."' WHERE `id` =1")) {
+		echo " <div class='section_box'><font color=\"green\"><u>Your update is finish, <a href='/'>Go on your pastebin</a></u></font><br /><br /></div>";		
+	} else 
+ 		echo " <div class='section_box'><font color=\"green\"><u>There is a probleme :/ please retry it!</u></font><br /><br />";
+    
+ 
+}
 
 if ($_GET["step"] == "1") {
     

@@ -391,13 +391,14 @@ class StartUp {
 			else
 			$level = "2";
 			
-		$query = "INSERT INTO ".$this->prefix_db."users (id,name,pass,mail,level) 
+		$query = "INSERT INTO ".$this->prefix_db."users (id,name,pass,mail,level,token) 
 	          VALUES (
 			  'NULL',
 			  '".$db->escape($name)."',
 			  '".$this->obscure($pass)."',
 			  '".$db->escape($mail)."',
-			  '$level'
+			  '$level',
+			  '".$this->generateToken()."'
 			  )";
     		$db->query($query);
     		if ($sendMail!='NULL')  
@@ -576,11 +577,11 @@ class pasteUsers extends startUp {
 				return false;		
 	}
 	###
-	function checkAdmin(){
+	function checkAdmin($token){
 		global $db;
 		if($this->checkCookie()){
 			$uid = $this->uid;
-			$query = "SELECT id FROM ".$this->prefix_db."users WHERE id = '$uid' AND level = '4' LIMIT 1;";
+			$query = "SELECT id FROM ".$this->prefix_db."users WHERE id = '".$db->escape($uid)."' AND token = '".$db->escape($token)."' AND level = '4' LIMIT 1;";
 			$user = $db->get_row($query); 
  
 				 if ($user->id)  
@@ -693,7 +694,7 @@ class pasteUsers extends startUp {
 	###
 	function setSession($username,$password,$cookie){
 		global $db;
-			$query = "SELECT id, level FROM ".$this->prefix_db."users WHERE 
+			$query = "SELECT id, level, token FROM ".$this->prefix_db."users WHERE 
 							name = '".$db->escape($username)."' AND pass = '".$this->obscure($password)."' AND level > '0' LIMIT 1;";
 		$row = $db->get_row($query,ARRAY_A); // get result in array (ARRAY_A)	
 				
@@ -706,9 +707,12 @@ class pasteUsers extends startUp {
 		}
 		// Gestion du token
 		if ($row['level'] === '4'){		
-			setcookie("tokenAdmin", uniqid(rand(), true), time()+60*60*24*100,'/');
+			setcookie("tokenAdmin", $row['token'], time()+60*60*24*100,'/');
 		}
-		setcookie("token", uniqid(rand(), true), time()+60*60*24*100,'/');		 		
+		setcookie("token", $row['token'], time()+60*60*24*100,'/');	 		
+	}
+	function generateToken(){
+		return uniqid(rand(), true);
 	}
 	###
 	function sqlesc($x) {

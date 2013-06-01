@@ -47,6 +47,10 @@ require($path.'/libs/lang/lang_'.$_SESSION['strLangue'].'.php');
  
  
 $userId = $startUp->isLogged();
+if ($userId && isset($_COOKIE['tokenAdmin'])) 
+	$isAdmin = $startUp->checkAdmin($_COOKIE['tokenAdmin']);
+else
+	$isAdmin = false;
  
 $smarty->assign("Name",$conf['title']);
 $smarty->assign("getConfigs",$conf);
@@ -54,7 +58,8 @@ $smarty->assign("getUserdata",$startUp->getUserdata());
 $smarty->assign("footer",$startUp->addFooter()); 
 $smarty->assign("userId",$userId); 
 $smarty->assign("userName",$startUp->session_username);
-$smarty->assign("Admin",$startUp->checkAdmin());
+$smarty->assign("Admin",$isAdmin);
+ 
 // Stats
 $today = time() - (1 * 24 * 60 * 60);
 $smarty->assign("getTotalpaste",$startUp->getTotalpaste());
@@ -84,9 +89,12 @@ $hook->addMenuLang('ru',$lang["russe"], '?strLangue=ru', 'ru.png', '5');
 if (!$userId) {
 	$hook->addUserMenu('gestcp','','','', '4');
 } else {
-	if ($startUp->checkAdmin()) {
-		$hook->addUserMenu('admincp','','','', '4'); 
-	}		
+	if (isset($_COOKIE['tokenAdmin'])) {
+		if ($isAdmin) {
+			$hook->addUserMenu('admincp','','','', '4'); 
+		}		
+	}
+	
 	$hook->addUserMenu('usercp','','','', '8');
 }
 
