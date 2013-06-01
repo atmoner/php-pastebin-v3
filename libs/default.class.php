@@ -594,7 +594,7 @@ class pasteUsers extends startUp {
 	function checkCredentials($username, $password){	
 		global $db; 
 		$password = $this->obscure($password);				
-		$query = "SELECT id FROM ".$this->prefix_db."users WHERE name = '$username' AND pass = '$password' AND level > '0' LIMIT 1;";
+		$query = "SELECT id FROM ".$this->prefix_db."users WHERE name = '".$db->escape($username)."' AND pass = '".$db->escape($password)."' AND level > '0' LIMIT 1;";
     		$user = $db->get_row($query); 
 		
 		if ($user->id) {
