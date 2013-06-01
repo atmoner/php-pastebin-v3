@@ -331,7 +331,7 @@ class StartUp {
          		$array['id'] = $obj->id;
             	$array['title'] = $this->Fuckxss($obj->title);
 				$array['lang'] = $obj->lang;  
-				$array['paste'] = stripslashes($obj->paste); 
+				$array['paste'] = stripslashes($this->Fuckxss($obj->paste)); 
            		$array['date'] = $obj->date;
            		$array['expire'] = $obj->expire; 
            		$array['exposure'] = $obj->exposure; 
