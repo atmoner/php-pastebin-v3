@@ -59,6 +59,7 @@ For safety tests, thanks to:
 *   [kallimero](http://hwc-crew.org/ "kallimero")
 *   [@5ct34m](https://twitter.com/5ct34m "@5ct34m")
 *   [@BinarySecurity ](https://twitter.com/BinarySecurity "@BinarySecurity ")
+*   [StenoPlasma](http://www.exploitdevelopment.com "StenoPlasma")
 
 For Debug, thanks to:
 
