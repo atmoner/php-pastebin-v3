@@ -60,7 +60,7 @@ $smarty->assign("getPaste",$p);
 $startUp->updateHits($id);
 } 
 
-$hook->set_title('title_paste','Detail paste'); 
+$hook->set_title('title_paste','['.strtoupper($p['lang']).'] '.$p['title']); 
 $hook->addcontentPaste('defaultpaste','',3);
 
 if ($hook->hook_exist('paste_page'))  
