@@ -396,8 +396,9 @@ class phphooks {
 	# Add css
 	###################
 	public function addCss($id, $file, $path, $p=5) {
+			global $conf;
 			if(!preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $file))
-				$file = 'http://'.$_SERVER['HTTP_HOST'].'/'.$path.$file;
+				$file = $conf['baseurl'].'/'.$path.$file;
 				
 				$this->add_Css[$id]['id'] = $id;
                 $this->add_Css[$id]['file'] = $file;
