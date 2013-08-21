@@ -11,8 +11,6 @@ Contact:  contact@atmoner.com
           
 */
 
-
-
  
 if (!defined("IN_PASTE"))
       die("Access denied!"); 
@@ -48,7 +46,7 @@ switch ($action) {
 
 	case "deactivate" :
 		$db->query("UPDATE plugins SET action='0' WHERE filename= '".$_GET ['filename']."'");
-		$startUp->redirect('/admincp/plugins/?tokenAdmin='.$_COOKIE['tokenAdmin']);
+		$startUp->redirect($conf['baseurl'].'/admincp/plugins/?tokenAdmin='.$_COOKIE['tokenAdmin']);
 		break;
 	case "activate" :
 		$count = count (getPlugins('filename',$_GET ['filename']));
@@ -60,7 +58,7 @@ switch ($action) {
 			// do_sqlquery("UPDATE plugins SET action='1' WHERE filename= '".$_GET ['filename']."'",true);
 			$db->query("UPDATE plugins SET action='1' WHERE filename= '".$_GET ['filename']."'");
 		}
-		$startUp->redirect('/admincp/plugins/?tokenAdmin='.$_COOKIE['tokenAdmin']);		
+		$startUp->redirect($conf['baseurl'].'/admincp/plugins/?tokenAdmin='.$_COOKIE['tokenAdmin']);		
 		break;
 }
  
