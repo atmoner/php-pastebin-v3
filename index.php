@@ -29,7 +29,7 @@
 // Twitter : @atmon3r 
 // 
 /////////////////////////////////////////////////////////////////////////
-// error_reporting(E_ALL);
+error_reporting(E_ERROR | E_PARSE);
 
 define("IN_PASTE",true);
 
