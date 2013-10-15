@@ -24,7 +24,10 @@
 				    </ul>   
         </div><!--/base-block-->
 	 	{else}	 	
-	 		{$i.title}
+	         <div class="base-block">
+	         	<div class="title">{$i.title}</div>
+	           	{$i.content}
+	         </div> 
 	 	{/if}
 	 {/foreach}        
        </div> 
