@@ -508,9 +508,7 @@ class StartUp {
 	}
 	###	
 	function Fuckxss($var) {
-			strip_tags($var);
-			$output = htmlspecialchars($var, ENT_QUOTES);
-		return $output;
+		return htmlspecialchars(strip_tags($var), ENT_NOQUOTES);
 	}	
 	###
 	function ago($time) {
