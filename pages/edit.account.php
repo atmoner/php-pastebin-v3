@@ -37,18 +37,40 @@ if (!defined("IN_PASTE"))
 $startUp->isLoggedAcount(); 
 
 if (isset($_POST['submit'])) {
-	if (!empty($_POST['mail'])) {
-		if ($startUp->checkMail($_POST['mail'])) {
-			$startUp->EditUserInfo('',$_POST['mail'],$_POST['showMail'],$_POST['location'],$_POST['website'],$_POST['signature']);		
-			$smarty->assign("errormail",false);	
-			$smarty->assign("syntaxmail",false);	
-			
-		} else
-			$smarty->assign("syntaxmail",true);	
+	if (!empty($_POST['mail']) || !empty($_POST['new_password'])) {
+		if (!empty($_POST['mail']) && !empty($_POST['new_password'])) {
 
-	} else 
-		$smarty->assign("errormail",true);	
-} 
+			$_POST['new_password'] = trim($_POST['new_password']);
+			$_POST['new_password_retype'] = trim($_POST['new_password_retype']);
+			$_POST['current_password'] = $startUp->obscure(trim($_POST['current_password']));
+	 
+			if ($_POST['new_password'] && $_POST['new_password_retype'] && $_POST['current_password']) {
+				if ($_POST['new_password'] === $_POST['new_password_retype']) {
+					if ($_POST['current_password'] === $startUp->getPassword($_POST['mail'])) {
+						$startUp->logPasswordChange($_POST['mail']);
+						$startUp->editUserInfo($_POST['new_password'],$_POST['mail'],$_POST['showMail'],$_POST['location'],$_POST['website'],$_POST['signature']);
+						$smarty->assign('wrongCurrentPassword', false);
+					} else {
+						$smarty->assign('wrongCurrentPassword', true);
+					}
+					$smarty->assign('wrongNewPassword', false);
+				} else {
+					$smarty->assign('wrongNewPassword', true);
+				}
+			}
+		} elseif (!empty($_POST['mail']) && empty($_POST['new_password'])) {
+			if ($startUp->checkMail($_POST['mail'])) {
+				$startUp->editUserInfo('',$_POST['mail'],$_POST['showMail'],$_POST['location'],$_POST['website'],$_POST['signature']);
+				$smarty->assign("errormail",false);
+				$smarty->assign("syntaxmail",false);
+			} else {
+				$smarty->assign("syntaxmail",true);
+			}
+		} else {
+			$smarty->assign("errormail",true);
+		}
+	}
+}
 		
  	
 $getUserdata = $startUp->getMydata();
