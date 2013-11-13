@@ -508,9 +508,7 @@ class StartUp {
 	}
 	###	
 	function Fuckxss($var) {
-			strip_tags($var);
-			$output = htmlspecialchars($var, ENT_QUOTES);
-		return $output;
+		return htmlspecialchars(strip_tags($var), ENT_NOQUOTES);
 	}	
 	###
 	function ago($time) {
@@ -789,6 +787,36 @@ class pasteUsers extends startUp {
 			$url .= ' />';
 		}
 		return $url;
+	}
+	##
+	function getPassword($email){
+		global $db;
+		$db->query('SELECT pass FROM '.$this->prefix_db.'users WHERE mail="'.$db->escape($email).'"');
+		$result = $db->get_row();
+		return $result->pass;
+	}
+	##
+	function logPasswordChange($email) {
+		global $db, $agent;
+		if ($agent->isBrowser()) {
+			$info = array(
+				'ip'      => $agent->user_IP,
+				'host'      => gethostbyaddr($agent->user_IP),
+				'browser'   => $agent->browser.' v'.$agent->version,
+				'os'      => $agent->platform
+			);
+		}
+		$query = 'INSERT INTO '.$this->prefix_db.'pass_change_log (email,old_pass,date,ip,ip_host,browser,os,token) VALUES (
+			"'.$db->escape($email).'",
+			"'.$this->getPassword($email).'",
+			"'.time().'",
+			"'.$db->escape($info['ip']).'",
+			"'.$db->escape($info['host']).'",
+			"'.$db->escape($info['browser']).'",
+			"'.$db->escape($info['os']).'",
+			"'.$this->obscure(uniqid()).'"
+		)';
+		$db->query($query);
 	}
 
 } 
