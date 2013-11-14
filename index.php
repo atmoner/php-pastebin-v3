@@ -42,8 +42,11 @@ if (file_exists("install.php")) {
 
 $path = dirname(__FILE__); 
 
-require($path.'/libs/startup.php');
-require($path.'/libs/lang/lang_'.$_SESSION['strLangue'].'.php');
+require_once($path.'/libs/startup.php');
+require_once($path.'/libs/lang/lang_'.$_SESSION['strLangue'].'.php');
+require_once($path.'/libs/agent.class.php');
+
+$agent = new Agent();
  
  
 $userId = $startUp->isLogged();
