@@ -43,6 +43,7 @@ $smarty  = new Smarty;
 $startUp = new pasteUsers; 
 $hook    = new phphooks();
 $conf 	 = $startUp->getConfigs();
+$agent = new Agent();
 $startUp->I18n();
 
 // Smarty config
