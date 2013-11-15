@@ -46,9 +46,7 @@ require_once($path.'/libs/startup.php');
 require_once($path.'/libs/lang/lang_'.$_SESSION['strLangue'].'.php');
 require_once($path.'/libs/agent.class.php');
 
-$agent = new Agent();
- 
- 
+
 $userId = $startUp->isLogged();
 if ($userId && isset($_COOKIE['tokenAdmin'])) 
 	$isAdmin = $startUp->checkAdmin($_COOKIE['tokenAdmin']);
