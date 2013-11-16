@@ -37,7 +37,7 @@ class StartUp {
 	private $get = '';
 	public $version = '3'; // Version of php-pastebin
 	public $rev = '0'; // Revision of php-pastebin
-	public $langAutorises; // Languages list
+	public $langAutorises = array('fr','en','ru');; // Languages list
  		
 	###
 	function __construct() {
@@ -366,8 +366,6 @@ class StartUp {
 			$chaine = $_SERVER['REQUEST_URI'];
 			$nbr = 13;
 			$url = substr($chaine, 0, -$nbr);
-	
-			$this->langAutorises = array('fr','en','ru');
 			if (in_array($_GET['strLangue'],$this->langAutorises))
 			$_SESSION['strLangue']=$_GET['strLangue'];
 			$this->redirect($url);
