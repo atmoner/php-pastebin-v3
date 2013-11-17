@@ -30,12 +30,13 @@
 // 
 /////////////////////////////////////////////////////////////////////////
 
-require($path.'/libs/Smarty.class.php');
-require($path.'/libs/db.php');
-require($path.'/libs/database/ez_sql_core.php');
-require($path.'/libs/database/ez_sql_mysql.php');
-require($path.'/libs/default.class.php'); 
-require($path.'/libs/Hooks.class.php'); 
+require_once($path.'/libs/Smarty.class.php');
+require_once($path.'/libs/db.php');
+require_once($path.'/libs/database/ez_sql_core.php');
+require_once($path.'/libs/database/ez_sql_mysql.php');
+require_once($path.'/libs/default.class.php'); 
+require_once($path.'/libs/Hooks.class.php'); 
+require_once($path.'/libs/agent.class.php');
 
 $db 	 = new ezSQL_mysql($user,$pass,$db,$host);
  
@@ -43,6 +44,7 @@ $smarty  = new Smarty;
 $startUp = new pasteUsers; 
 $hook    = new phphooks();
 $conf 	 = $startUp->getConfigs();
+$agent = new Agent();
 $startUp->I18n();
 
 // Smarty config
@@ -94,4 +96,4 @@ function register_plugin($plugin_id, $data) {
 $smarty->assign('hooks',$hook); // !! do not remove....
 $smarty->assign("getPastes",$startUp->getPastes());
 
-
+?>

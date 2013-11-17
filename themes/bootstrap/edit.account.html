@@ -2,6 +2,22 @@
       <div class="row-fluid">
 			{include file="sidebar.html"} 
         <div class="span8"> 
+
+            {if $wrongNewPassword}
+			 <br />
+            <div class="alert alert-error">
+                   	<b>{$lang.error} :</b> New passwords doens't match!
+                   	<a href="#" class="close" data-dismiss="alert">&times;</a>
+            </div>
+            {/if}
+
+            {if $wrongCurrentPassword}
+			<br />
+            <div class="alert alert-error">
+                   	<b>{$lang.error} :</b> Your current password doens't match!
+                   	<a href="#" class="close" data-dismiss="alert">&times;</a>
+            </div>
+            {/if}
         
             {if $errormail}
                 	 <br />
@@ -35,6 +51,11 @@
 											<input type="radio" name="showMail" id="showMail2" value="false" {if $getUserdata->seemail eq 'false'}checked{/if}>
 											{$lang.notshowmailconf}
 											</label>
+										<legend>Account Password</legend>
+											Leave it blank if you don't want to change your current password.<br /><br />
+											<label for="new_password">New Password</label><input type="password" id="new_password" name="new_password" />
+											<label for="new_password_retype">Re-type New Password</label><input type="password" id="new_password_retype" name="new_password_retype" />
+											<label for="current_password">Your current Password</label><input type="password" id="current_password" name="current_password" />
 
 										<legend>Additional information</legend>
 										<label>{$lang.userloc}</label>

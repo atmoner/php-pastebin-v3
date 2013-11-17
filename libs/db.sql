@@ -226,6 +226,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
 
+-- --------------------------------------------------------
+
 --
 -- Contenu de la table `users`
 --
@@ -233,3 +235,21 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `name`, `pass`, `mail`, `level`, `seemail`, `signature`, `location`, `website`) VALUES
 (0, 'Anonymous', '', '', '1', 'false', '', '', '');
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `pass_change_log`
+--
+
+CREATE TABLE IF NOT EXISTS `pass_change_log` (
+  `id` int(15) NOT NULL AUTO_INCREMENT,
+  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `old_pass` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `date` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `ip` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `ip_host` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `browser` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `os` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `token` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;

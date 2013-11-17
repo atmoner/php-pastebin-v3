@@ -32,11 +32,12 @@
  
 class StartUp {
 
-	var $prefix_db = ''; // Prefix db (for security)
-	var $version = '3'; // Version of php-pastebin
-	var $rev = '0'; // Revision of php-pastebin
-	var $charset = 'utf-8'; // Chraset
-	var $get = '';
+	private $prefix_db = ''; // Prefix db (for security)
+	private $charset = 'utf-8'; // Chraset
+	private $get = '';
+	public $version = '3'; // Version of php-pastebin
+	public $rev = '0'; // Revision of php-pastebin
+	public $langAutorises = array('fr','en','ru');; // Languages list
  		
 	###
 	function __construct() {
@@ -58,13 +59,13 @@ class StartUp {
 	###
 	function cGet($get) {
 	// var_dump($get);
-	    $this->get = $get;
-	    if(is_numeric($this->get)) {
-	      $get=(int)$this->get;
-	    } else {
-	      $get=htmlspecialchars($this->get);
-	    }
-	    // return $get;
+		$this->get = $get;
+		if(is_numeric($this->get)) {
+			$get=(int)$this->get;
+		} else {
+			$get=htmlspecialchars($this->get);
+		}
+		// return $get;
 	}
 	###
 	function getConfigs(){
@@ -365,9 +366,7 @@ class StartUp {
 			$chaine = $_SERVER['REQUEST_URI'];
 			$nbr = 13;
 			$url = substr($chaine, 0, -$nbr);
-	
-			$langAutorises = array('fr','en','ru');
-			if (in_array($_GET['strLangue'],$langAutorises))
+			if (in_array($_GET['strLangue'],$this->langAutorises))
 			$_SESSION['strLangue']=$_GET['strLangue'];
 			$this->redirect($url);
 		} else {
@@ -788,6 +787,36 @@ class pasteUsers extends startUp {
 		}
 		return $url;
 	}
+	##
+	function getPassword($email){
+		global $db;
+		$db->query('SELECT pass FROM '.$this->prefix_db.'users WHERE mail="'.$db->escape($email).'"');
+		$result = $db->get_row();
+		return $result->pass;
+	}
+	##
+	function logPasswordChange($email) {
+		global $db, $agent;
+		if ($agent->isBrowser()) {
+			$info = array(
+				'ip'      => $agent->user_IP,
+				'host'      => gethostbyaddr($agent->user_IP),
+				'browser'   => $agent->browser.' v'.$agent->version,
+				'os'      => $agent->platform
+			);
+		}
+		$query = 'INSERT INTO '.$this->prefix_db.'pass_change_log (email,old_pass,date,ip,ip_host,browser,os,token) VALUES (
+			"'.$db->escape($email).'",
+			"'.$this->getPassword($email).'",
+			"'.time().'",
+			"'.$db->escape($info['ip']).'",
+			"'.$db->escape($info['host']).'",
+			"'.$db->escape($info['browser']).'",
+			"'.$db->escape($info['os']).'",
+			"'.$this->obscure(uniqid()).'"
+		)';
+		$db->query($query);
+	}
 
-} 
-  
+}
+?>
