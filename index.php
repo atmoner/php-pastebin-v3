@@ -44,9 +44,9 @@ $path = dirname(__FILE__);
 
 require_once($path.'/libs/startup.php');
 require_once($path.'/libs/lang/lang_'.$_SESSION['strLangue'].'.php');
-// require_once($path.'/libs/agent.class.php');
+require_once($path.'/libs/agent.class.php');
 
-// $agent = new Agent();
+$agent = new Agent();
  
  
 $userId = $startUp->isLogged();
