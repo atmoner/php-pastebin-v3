@@ -817,6 +817,13 @@ class pasteUsers extends startUp {
 		)';
 		$db->query($query);
 	}
+	##
+	function getCaptchaStatus() {
+		global $db;
+		$db->query('SELECT value FROM '.$this->prefix_db.'settings WHERE `key` = "use_captcha"');
+		$result = $db->get_row();
+		return ($result->value == 'no') ? 'no' : 'yes';
+	}
 
 }
 ?>

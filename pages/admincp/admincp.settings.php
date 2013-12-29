@@ -50,6 +50,7 @@ $settings["metad"] = $_POST["metad"]; // Meta description
 $settings["metak"] = $_POST["metak"]; // Meta keyword
 $settings["paypalmail"] = $_POST["paypalmail"]; // Meta keyword
 $settings["amout"] = $_POST["amout"]; // Meta keyword
+$settings["use_captcha"] = $_POST["use_captcha"]; // Use captcha
 
 
         foreach($_POST as $key=>$value) {

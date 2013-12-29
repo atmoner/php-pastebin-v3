@@ -34,7 +34,9 @@ if (!defined("IN_PASTE"))
       die("Access denied!");
       
 if (isset($_POST['submit'])){
-if (($_POST["txtCaptcha"] == $_SESSION["security_code"]) && (!empty($_POST["txtCaptcha"]) && !empty($_SESSION["security_code"])) ) {
+if ($startUp->getCaptchaStatus() == 'no' ||
+        (($_POST["txtCaptcha"] == $_SESSION["security_code"]) && (!empty($_POST["txtCaptcha"]) && !empty($_SESSION["security_code"])))
+    ) {
         if (!empty($_POST['paste'])){
 
                 if(empty($_POST['title'])) {
@@ -53,6 +55,7 @@ if (($_POST["txtCaptcha"] == $_SESSION["security_code"]) && (!empty($_POST["txtC
 }  
 
 $smarty->assign("getLangs",$startUp->getLangs()); 
+$smarty->assign("getCaptchaStatus",$startUp->getCaptchaStatus());
  
 $hook->set_title('home_title', $lang["titlehome"]); 
 $hook->add_block('pasteForm', '', '',740,10); 
