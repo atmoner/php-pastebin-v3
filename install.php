@@ -10,8 +10,9 @@ _____ _/ |_ _____ ____ ____ ___________
 Website: http://atmoner.com/
 Contact: contact@atmoner.com
 */
-
+error_reporting(E_ERROR | E_PARSE);
 session_start(); 
+
 $path = dirname(__FILE__);
 
 /* if (filesize($path."/libs/db.php") != 0) {
