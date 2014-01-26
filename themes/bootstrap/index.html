@@ -74,12 +74,16 @@
               <p>
 				<input data-placement="right" rel="tooltip" data-original-title="{$lang.pasteName}" name="title" type="text" value="{if isset($smarty.post.title)}{$smarty.post.title}{/if}" class="st-forminput" /><br />
 		      </p>
+          {if $getCaptchaStatus eq 'yes'}
               <h4>Captcha</h4>
               <p>
  			 	 
 				<input data-placement="right" rel="tooltip" data-original-title="{$lang.validcaptcha}" id="txtCaptcha" type="text" name="txtCaptcha" maxlength="5" size="13" /><br />
-				<img data-placement="right" rel="tooltip" data-original-title="{$lang.CoCtrit}" id="imgCaptcha" src="libs/captcha/create_image.php" onclick="setTimeout('refreshimg()', 300); return false;" alt="{$lang.CoCtrit}" /><br /><br />
-				<input name="submit" type="submit" value="Submit" id="submit" class="btn btn-primary" />     
+				<img data-placement="right" rel="tooltip" data-original-title="{$lang.CoCtrit}" id="imgCaptcha" src="libs/captcha/create_image.php" onclick="setTimeout('refreshimg()', 300); return false;" alt="{$lang.CoCtrit}" /><br />
+          {/if}
+
+        <br />
+				<input name="submit" type="submit" value="Submit" id="submit" class="btn btn-primary" />
               </p>
             </div><!--/span-->
 
