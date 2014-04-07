@@ -86,7 +86,7 @@ header("location:".$location);
 if ($_GET["update"] == "1") {
 
     require($path.'/libs/startup.php');
-				$query = "SELECT u.id, u.name, u.mail, u.level, u.signature, u.seemail, u.location, u.website, statuts.id, statuts.level, statuts.maxlines FROM ".$startUp->prefix_db."users AS u";
+				$query = "SELECT u.id, u.name, u.mail, u.level, u.signature, u.seemail, u.location, u.website, statuts.id, statuts.level, statuts.maxlines FROM ".$startUp->getPrefixDb()."users AS u";
 				$query .= " INNER JOIN statuts ON u.level=statuts.id";
 				$query .= " WHERE u.id='1' LIMIT 1";
     		$user = $db->get_row($query,OBJECT); // get result in objet (OBJECT) 

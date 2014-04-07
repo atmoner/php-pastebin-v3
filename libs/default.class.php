@@ -32,13 +32,13 @@
  
 class StartUp {
 
-	private $prefix_db = ''; // Prefix db (for security)
+	protected $prefix_db = ''; // Prefix db (for security)
 	private $charset = 'utf-8'; // Chraset
 	private $get = '';
 	public $version = '3'; // Version of php-pastebin
 	public $rev = '0'; // Revision of php-pastebin
 	public $langAutorises = array('fr','en','ru'); // Languages list
- 		
+
 	###
 	function __construct() {
 		session_start();
@@ -404,13 +404,14 @@ class StartUp {
     		$this->sendMail($name,$mail,$pass,$hash);
      		if ($redirect!='NULL') 
      			$this->redirect($conf['baseurl'].'/zone-login.html');    				
-			
+
+            return true;
 		} else
 			return false; 
 	}
 	###
 	function EditUserInfo($pass='',$mail,$seemail,$location,$website,$sign) {
-		global $db;
+		global $db, $conf;
 		if (empty($pass)) {
 			$pass = '';
 		} else {
@@ -455,8 +456,10 @@ class StartUp {
 		    $FM->Mailer->Subject = 'Registration';
 		    $FM->Mailer->AddAddress($mail,$user);
 		    //And now, send the mail...
-		    if ($FM->Send()) 
-	return true;	
+		    if ($FM->Send()) {
+	            return true;
+            }
+        return false;
 	}	
 	### 
 	function getThemes($dir,$mode='folders'){	 
@@ -824,6 +827,10 @@ class pasteUsers extends startUp {
 		$result = $db->get_row();
 		return ($result->value == 'no') ? 'no' : 'yes';
 	}
+
+    function getPrefixDb() {
+        return $this->prefix_db;
+    }
 
 }
 ?>
