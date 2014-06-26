@@ -58,8 +58,8 @@ $settings["use_captcha"] = $_POST["use_captcha"]; // Use captcha
                $value==true ? $value='true' : $value='false';
             $values[]="(".$startUp->sqlesc($key).",".$startUp->sqlesc($value).")";
         }
-        $db->query("DELETE FROM ".$startUp->prefix_db."settings");
-        $db->query("INSERT INTO ".$startUp->prefix_db."settings (`key`,`value`) VALUES ".implode(",",$values).";");
+        $db->query("DELETE FROM ".$startUp->getPrefixDb."settings");
+        $db->query("INSERT INTO ".$startUp->getPrefixDb."settings (`key`,`value`) VALUES ".implode(",",$values).";");
 		// $db->debug();
 		
         $startUp->editmaxPaste($_POST["maxline_1"],1); 
