@@ -41,7 +41,7 @@ class StartUp {
 
 	###
 	function __construct() {
-		session_start();
+		if (session_status() == PHP_SESSION_NONE) session_start();
 		header("Content-type:text/html; charset=".$this->charset."");
 		$this->checkInstallFile();		
 		$this->cleandata();
