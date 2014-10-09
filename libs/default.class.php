@@ -41,7 +41,9 @@ class StartUp {
 
 	###
 	function __construct() {
-		if (session_status() == PHP_SESSION_NONE) session_start();
+		if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
+			if (session_status() == PHP_SESSION_NONE) session_start();
+		}				
 		header("Content-type:text/html; charset=".$this->charset."");
 		$this->checkInstallFile();		
 		$this->cleandata();
