@@ -38,6 +38,7 @@ $lang["changelang"]="Change language";
 $lang["english"]="English";
 $lang["french"]="French";
 $lang["russe"]="Russian";
+$lang["dutch"]="Dutch";
 $lang["Loginas"]="Logged in as";
 $lang["viewPaste"]="View paste";
 $lang["hits"]="Hits";
@@ -80,7 +81,7 @@ $lang["mailsettings"]="Mail settings";
 $lang["showmailconf"]="Show your email on your profile public.";
 $lang["notshowmailconf"]="Not show your email on your profile public.";
 $lang["Submit"]="Submit";
-$lang["editProfile"]="Edit profil";
+$lang["editProfile"]="Edit profile";
 $lang["Search"]="Search";
 
 //Page title
