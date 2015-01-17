@@ -39,6 +39,7 @@ $lang["changelang"]="Changer la langue";
 $lang["english"]="Anglais";
 $lang["french"]="Francais";
 $lang["russe"]="Russe";
+$lang["dutch"]="Néerlandais";
 $lang["Loginas"]="Connecté sous";
 $lang["viewPaste"]="Voir le paste";
 $lang["hits"]="Nombre de Hits";
