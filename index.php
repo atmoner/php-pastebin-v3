@@ -87,6 +87,7 @@ $hook->addMenu('viewAllpastes',$lang["viewPastes"], 'last-pastes.html', 'dashboa
 $hook->addMenuLang('en',$lang["english"], '?strLangue=en', 'en.png', '3');
 $hook->addMenuLang('fr',$lang["french"], '?strLangue=fr', 'fr.png', '4');
 $hook->addMenuLang('ru',$lang["russe"], '?strLangue=ru', 'ru.png', '5');
+$hook->addMenuLang('nl',$lang["dutch"], '?strLangue=nl', 'nl.png', '2');
  
 // Usermenu hook
 if (!$userId) {
