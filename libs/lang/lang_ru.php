@@ -38,6 +38,7 @@ $lang["changelang"]="клевета";
 $lang["english"]="английский";
 $lang["french"]="французский";
 $lang["russe"]="русский";
+$lang["dutch"]="голландский";
 $lang["Loginas"]="Вы вошли как";
 $lang["viewPaste"]="смотреть";
 $lang["hits"]="Просмотров";

@@ -37,7 +37,7 @@ class StartUp {
 	private $get = '';
 	public $version = '3'; // Version of php-pastebin
 	public $rev = '0'; // Revision of php-pastebin
-	public $langAutorises = array('fr','en','ru'); // Languages list
+	public $langAutorises = array('fr','en','ru','nl'); // Languages list
 
 	###
 	function __construct() {

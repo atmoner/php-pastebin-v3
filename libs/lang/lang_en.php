@@ -38,6 +38,7 @@ $lang["changelang"]="Change language";
 $lang["english"]="English";
 $lang["french"]="French";
 $lang["russe"]="Russian";
+$lang["dutch"]="Dutch";
 $lang["Loginas"]="Logged in as";
 $lang["viewPaste"]="View paste";
 $lang["hits"]="Hits";
