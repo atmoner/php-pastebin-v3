@@ -80,7 +80,7 @@ $lang["mailsettings"]="Mail settings";
 $lang["showmailconf"]="Show your email on your profile public.";
 $lang["notshowmailconf"]="Not show your email on your profile public.";
 $lang["Submit"]="Submit";
-$lang["editProfile"]="Edit profil";
+$lang["editProfile"]="Edit profile";
 $lang["Search"]="Search";
 
 //Page title
