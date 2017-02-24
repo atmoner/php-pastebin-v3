@@ -75,7 +75,7 @@ $hook->add_side_block('defaultSidebar','','', 3);
 
 
 // Javascript hook
-$hook->addJs('Jquery','http://code.jquery.com/jquery-latest.min.js','','1');
+$hook->addJs('Jquery','https://code.jquery.com/jquery-latest.min.js','','1');
 // Css hook
 $hook->addCss('Style','style.css','themes/'.$conf['theme'].'/style/','1');
 // Main menu hook
@@ -187,6 +187,4 @@ switch (isset($_GET["page"])?$_GET["page"]:""){
 		else 
 			$startUp->redirect($conf['baseurl'].'/');
         break;
-}  
-
-
+}
